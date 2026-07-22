@@ -1,0 +1,91 @@
+name: PR Validation
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
+  security-events: write
+
+jobs:
+
+  # ─────────────────────────────────────────────────────────────
+  # Job 1: Super Linter
+  # Runs tflint (Terraform style), Markdown, YAML, JSON linting
+  # Note: Super Linter covers tflint (style/lint rules)
+  #       The Terraform job below covers fmt and validate (formatting + logic)
+  #       Both are complementary, not redundant.
+  # ─────────────────────────────────────────────────────────────
+  super-linter:
+    name: Super Linter
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Run Super Linter
+        uses: super-linter/super-linter@4ce20838b8ab83717e78138c5b3a1407148e0918  # v8.7.0
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          VALIDATE_TERRAFORM_TFLINT: true
+          VALIDATE_MARKDOWN: true
+          VALIDATE_YAML: true
+          VALIDATE_JSON: true
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # ─────────────────────────────────────────────────────────────
+  # Job 2: Terraform Fmt & Validate
+  # Checks formatting and validates syntax/logic for all environments
+  # Uses -chdir flag (native Terraform) instead of cd for robustness
+  # ─────────────────────────────────────────────────────────────
+  terraform:
+    name: Terraform Fmt & Validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e  # v4.0.1
+        with:
+          terraform_version: "v1.15.8"
+
+      - name: Terraform fmt
+        run: terraform fmt -check -recursive
+
+      - name: Terraform validate
+        run: |
+          for dir in $(find terraform/environments -type f -name "*.tf" -exec dirname {} \; | sort -u); do
+            echo "──────────────────────────────────────"
+            echo "Validating: $dir"
+            echo "──────────────────────────────────────"
+            terraform -chdir="$dir" init -backend=false
+            terraform -chdir="$dir" validate
+          done
+
+  # ─────────────────────────────────────────────────────────────
+  # Job 3: Security Scanning (coming in M1)
+  # Will cover: tfsec, Checkov, Trivy, Gitleaks, OPA/Conftest
+  # See ADR-003 and CONTRIBUTING.md for pipeline security standards
+  # ─────────────────────────────────────────────────────────────
+  # security:
+  #   name: Security Scan
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+  #     - name: Run tfsec
+  #       uses: aquasecurity/tfsec-action@...
+  #     - name: Run Checkov
+  #       uses: bridgecrewio/checkov-action@...
+  #     - name: Run Gitleaks
+  #       uses: gitleaks/gitleaks-action@...
