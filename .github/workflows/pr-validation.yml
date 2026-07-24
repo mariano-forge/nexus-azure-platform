@@ -12,6 +12,7 @@ permissions:
   contents: read
   pull-requests: write
   security-events: write
+  issues: write
 
 jobs:
 
@@ -71,6 +72,69 @@ jobs:
             terraform -chdir="$dir" init -backend=false
             terraform -chdir="$dir" validate
           done
+
+  create-issue-on-failure:
+    name: Create Issue on Failure
+    runs-on: ubuntu-latest
+    needs: [super-linter, terraform]
+    # if: always() && contains(needs.*.result, 'failure') && github.event.pull_request == null
+    if: always() && contains(needs.*.result, 'failure') && github.event_name == 'push'
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: Create issue on failure
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3  # v9.0.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const signature = `${context.workflow} on ${context.ref}`;
+            const title = `🚨 CI Failure: ${signature}`;
+            const body = `
+            ## ❌ Workflow Failed
+
+            | Field | Value |
+            |-------|-------|
+            | **Workflow** | \`${context.workflow}\` |
+            | **Branch** | \`${context.ref}\` |
+            | **Job** | \`${context.job}\` |
+            | **Run** | [${context.runNumber}](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}) |
+            | **Commit** | [${context.sha.substring(0, 7)}](https://github.com/${context.repo.owner}/${context.repo.repo}/commit/${context.sha}) |
+            | **Triggered by** | \`${context.actor}\` |
+
+            Please check the [logs](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}) and fix the issue.
+            `;
+
+            // Recherche une issue ouverte existante avec le même titre
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: ['ci-failure']
+            });
+
+            const existing = issues.data.find(issue => issue.title === title);
+
+            if (existing) {
+              core.info(`Issue #${existing.number} already exists — adding a comment instead.`);
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body: `⚠️ **Failure recurred** on run [#${context.runNumber}](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}) — commit \`${context.sha.substring(0, 7)}\``
+              });
+              return;
+            }
+
+            // Crée une nouvelle issue
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body,
+              labels: ['ci-failure', 'bug', 'priority/high'],
+              assignees: ['mariano-gbego']
+            });
 
   # ─────────────────────────────────────────────────────────────
   # Job 3: Security Scanning (coming in M1)

@@ -1,3 +1,5 @@
+# Nexus Azure Platform
+
 <!--
   Nexus Azure Platform - Enterprise Internal Developer Platform Blueprint
   Copyright 2026 Mariano Gbego
@@ -5,8 +7,6 @@
 -->
 
 <div align="center">
-
-# Nexus Azure Platform
 
 **A production-grade Enterprise Azure Platform built with security-first Platform Engineering principles.**
 
@@ -16,7 +16,7 @@
 [![Terraform](https://img.shields.io/badge/IaC-Terraform-7B42BC)](https://www.terraform.io/)
 [![Azure](https://img.shields.io/badge/Cloud-Azure-0078D4)](https://azure.microsoft.com)
 [![Backstage](https://img.shields.io/badge/IDP-Backstage-9B59B6)](https://backstage.io/)
-[![Status](https://img.shields.io/badge/Status-MVP%20In%20Progress-yellow)](https://github.com/mariano-gbego/nexus-azure-platform/projects)
+[![Status](https://img.shields.io/badge/Status-MVP%20In%20Progress-yellow)](https://github.com/mariano-forge/nexus-azure-platform/projects)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](CONTRIBUTING.md)
 
 </div>
@@ -48,7 +48,7 @@ Each architectural choice — networking topology, secret management strategy, G
 You will find not just the implementation, but the reasoning behind it.
 
 > 💡 **Why no Azure Firewall in the MVP?**  
-> To keep the blueprint **cost-optimized** and accessible for open-source contributions, this MVP uses NSGs with Service Tags and Private Endpoints for network security — saving ~300€/month. Enterprises can easily swap in Azure Firewall if needed. See [ADR-004](docs/adr/004-why-private-endpoints.md).
+> To keep the blueprint **cost-optimized** and accessible for open-source contributions, this MVP uses NSGs with Service Tags and Private Endpoints for network security — saving ~800€/month. Enterprises can easily swap in Azure Firewall if needed. See [ADR-004](docs/adr/004-why-private-endpoints.md).
 
 ---
 
@@ -57,6 +57,7 @@ You will find not just the implementation, but the reasoning behind it.
 Imagine a company with 500 developers adopting Azure.
 
 They need:
+
 - A secure, governed Landing Zone
 - A self-service portal to provision environments without opening a ticket
 - Standardized, security-scanned CI/CD pipelines
@@ -69,7 +70,7 @@ Nexus Azure Platform is the answer to that need.
 
 ## Architecture Overview
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                   Nexus Azure Platform                      │
 │                                                             │
@@ -94,10 +95,10 @@ Nexus Azure Platform is the answer to that need.
 
 ## 🗺️ Roadmap & Milestones
 
-Check our [GitHub Project Board](https://github.com/mariano-gbego/nexus-azure-platform/projects) for live progress!
+Check our [GitHub Project Board](https://github.com/mariano-forge/nexus-azure-platform/projects) for live progress!
 
 | # | Milestone | Status | Description |
-|---|-----------|--------|-------------|
+| --- | --- | --- | --- |
 | **M1** 🏗️ | **Landing Zone & Core Security** | 🚧 In Progress | Terraform modules for Hub/Spoke networking, Private DNS, Private Endpoints, Key Vault, Log Analytics. Azure Policies, RBAC, PIM. DevSecOps pipeline (tfsec, Checkov, Trivy, manual approval). |
 | **M2** 🧩 | **Developer Self-Service** | 📅 Planned | Backstage portal, Software Templates (Scaffolder), MkDocs documentation site, C4 diagrams, first ADRs. |
 | **M3** ⚙️ | **GitOps & Advanced Governance** | 📅 Planned | ArgoCD + Helm/Kustomize, Azure PIM, Defender for Cloud, automated secret rotation. |
@@ -108,7 +109,7 @@ Check our [GitHub Project Board](https://github.com/mariano-gbego/nexus-azure-pl
 
 ## What's inside
 
-```
+```text
 nexus-azure-platform/
 ├── terraform/                  # All infrastructure as code
 │   ├── modules/                # Reusable Terraform modules
@@ -145,7 +146,7 @@ nexus-azure-platform/
 Security is not a layer added on top. It is embedded in every component.
 
 | Layer | Implementation |
-|-------|---------------|
+| --- | --- |
 | **Infrastructure** | Azure Policy (Deny mode), CIS Benchmark, NSG micro-segmentation |
 | **Identity** | Workload Identity, Managed Identity, PIM |
 | **Secrets** | Key Vault, automated rotation, no static credentials |
@@ -162,7 +163,7 @@ Every major decision is documented and justified. This is what makes Nexus Azure
 See the [ADR Template](docs/adr/_template.md) to learn how to create one.
 
 | ADR | Decision | Status |
-|-----|----------|--------|
+| --- | --- | --- |
 | [ADR-001](docs/adr/001-why-terraform.md) | Why Terraform over Bicep/Pulumi? | ✅ Accepted |
 | [ADR-002](docs/adr/002-why-hub-spoke.md) | Why Hub & Spoke topology? | ✅ Accepted |
 | [ADR-003](docs/adr/003-why-github-actions.md) | Why GitHub Actions over Azure DevOps? | ✅ Accepted |
@@ -189,7 +190,7 @@ See the [ADR Template](docs/adr/_template.md) to learn how to create one.
 
 ```bash
 # Clone the repository
-git clone https://github.com/mariano-gbego/nexus-azure-platform.git
+git clone https://github.com/mariano-forge/nexus-azure-platform.git
 cd nexus-azure-platform
 
 # Authenticate to Azure
@@ -219,7 +220,7 @@ terraform destroy
 Every Pull Request triggers a comprehensive validation pipeline:
 
 | Step | Tool | Purpose |
-|------|------|---------|
+| --- | --- | --- |
 | 1️⃣ | Terraform fmt | Enforce code style |
 | 2️⃣ | Terraform validate | Syntax and logic check |
 | 3️⃣ | tfsec | Infrastructure security scanning |
@@ -259,7 +260,7 @@ This choice ensures maximum enterprise adoption while protecting contributors an
 **Mariano Gbego** · Platform Engineer · Security-First
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mariano-gbego-4692651a5)
-✉️ gbegomariano@gmail.com
+[gbegomariano@gmail.com](mailto:gbegomariano@gmail.com)
 
 ---
 
