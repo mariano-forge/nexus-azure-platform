@@ -1,4 +1,4 @@
-# Nexus Azure Platform
+
 
 <!--
   Nexus Azure Platform - Enterprise Internal Developer Platform Blueprint
@@ -7,6 +7,8 @@
 -->
 
 <div align="center">
+
+# Nexus Azure Platform
 
 **A production-grade Enterprise Azure Platform built with security-first Platform Engineering principles.**
 
