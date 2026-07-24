@@ -1,1 +1,50 @@
-*       @mariano-gbego
+# ─────────────────────────────────────────────────────────────
+# Default owners (catch-all for the entire repository)
+# ─────────────────────────────────────────────────────────────
+**/* @mariano-forge/platform-engineering
+
+# ─────────────────────────────────────────────────────────────
+# Cloud Governance (Management Groups, Policies, RBAC)
+# ─────────────────────────────────────────────────────────────
+/terraform/modules/landing-zone/ @mariano-forge/governance
+/terraform/modules/policies/ @mariano-forge/governance
+
+# ─────────────────────────────────────────────────────────────
+# Network (Hub & Spoke, Private DNS, NSGs, Firewall)
+# ─────────────────────────────────────────────────────────────
+/terraform/modules/networking/ @mariano-forge/network
+/terraform/modules/dns/ @mariano-forge/network
+
+# ─────────────────────────────────────────────────────────────
+# Security (Key Vault, Defender, RBAC, PIM, Compliance)
+# ─────────────────────────────────────────────────────────────
+/terraform/modules/security/ @mariano-forge/security
+/terraform/modules/keyvault/ @mariano-forge/security
+/terraform/modules/defender/ @mariano-forge/security
+/terraform/modules/rbac/ @mariano-forge/security
+
+# ─────────────────────────────────────────────────────────────
+# Platform Engineering (AKS, Backstage, Observability, GitOps)
+# ─────────────────────────────────────────────────────────────
+/terraform/modules/aks/ @mariano-forge/platform-engineering
+/terraform/modules/backstage/ @mariano-forge/platform-engineering
+/terraform/modules/observability/ @mariano-forge/platform-engineering
+/terraform/modules/gitops/ @mariano-forge/platform-engineering
+/backstage/ @mariano-forge/platform-engineering
+/gitops/ @mariano-forge/platform-engineering
+
+# ─────────────────────────────────────────────────────────────
+# Environments
+# ─────────────────────────────────────────────────────────────
+/terraform/environments/dev/ @mariano-forge/platform-engineering
+/terraform/environments/staging/ @mariano-forge/platform-engineering
+/terraform/environments/prod/ @mariano-forge/governance @mariano-forge/network @mariano-forge/security @mariano-forge/platform-engineering
+
+# ─────────────────────────────────────────────────────────────
+# Critical files — all teams required
+# ─────────────────────────────────────────────────────────────
+/.github/ @mariano-forge/governance @mariano-forge/network @mariano-forge/security @mariano-forge/platform-engineering
+/.github/workflows/ @mariano-forge/governance @mariano-forge/network @mariano-forge/security @mariano-forge/platform-engineering
+/docs/adr/ @mariano-forge/governance @mariano-forge/network @mariano-forge/security @mariano-forge/platform-engineering
+/README.md @mariano-forge/governance @mariano-forge/network @mariano-forge/security @mariano-forge/platform-engineering
+/CONTRIBUTING.md @mariano-forge/governance @mariano-forge/network @mariano-forge/security @mariano-forge/platform-engineering
