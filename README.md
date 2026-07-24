@@ -169,6 +169,8 @@ See the [ADR Template](docs/adr/_template.md) to learn how to create one.
 | [ADR-004](docs/adr/004-why-private-endpoints.md) | Why Private Endpoints and no Azure Firewall in MVP? | ✅ Accepted |
 | [ADR-005](docs/adr/005-why-backstage.md) | Why Backstage for the IDP? | 🚧 Draft |
 | [ADR-006](docs/adr/006-why-argocd.md) | Why ArgoCD for GitOps? | 🚧 Draft |
+| [ADR-007](docs/adr/007-separation-network-security.md) | Separation of Duties — Network vs Security Teams | ✅ Accepted |
+| [ADR-008](docs/adr/008-team-structure-governance.md) | Team Structure and Governance Model | ✅ Accepted |
 
 > ADRs are continuously added as the platform evolves.
 
