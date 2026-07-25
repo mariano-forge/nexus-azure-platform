@@ -1,0 +1,16 @@
+version: 2
+updates:
+  - package-ecosystem: "terraform"
+    directory: "/"          # scanne récursivement depuis la racine
+    schedule:
+      interval: "weekly"
+    reviewers:
+      - "mariano-gbego"      # ou ton username
+    labels:
+      - "dependencies"
+      - "terraform"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
