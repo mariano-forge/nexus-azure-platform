@@ -27,7 +27,7 @@ This is the actual, committed scope (see README → "Project status"). Anything 
 - Gitleaks (secret detection)
 - Manual approval before `terraform apply` on critical environments
 
-### Documentation & ADRs
+### Documentation & ADRs - M1
 
 - MkDocs site
 - ADRs for all key decisions (already: ADR-001 to ADR-004, ADR-007, ADR-008)
@@ -67,7 +67,7 @@ Validated in `terraform plan` / dry-run against every module first. A minimal re
 - A budget resource (`azurerm_consumption_budget`) is created by the **same Terraform module** that provisions a new subscription — IaC-driven, not a manual step
 - Mandatory tags enforced by Azure Policy: `costCenter`, `application`, `environment`, `owner`
 
-### Documentation & ADRs
+### Documentation & ADRs - M2
 
 - MkDocs: Backstage user guide, self-service templates guide, approval workflow documentation
 - ADR-005 (Backstage), plus a new ADR documenting the PR/CODEOWNERS approval mechanism
@@ -99,7 +99,7 @@ Validated in `terraform plan` / dry-run against every module first. A minimal re
 
 *(Auto-scale, auto-cleanup, auto-patch, and the previously-proposed "auto-budget" are explicitly out of scope here — see "Beyond this repo" in the README. They add real testing burden — canary rollout, dry-run modes — that isn't worth it for a single demonstrated runbook.)*
 
-### Documentation & ADRs
+### Documentation & ADRs - M3
 
 - MkDocs: observability runbook, incident response guide
 - New ADR: Observability & Auto-Remediation scope for the MVP (why only one runbook, why Dynamic Thresholds over a custom ML model)
