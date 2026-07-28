@@ -72,7 +72,7 @@ Validated in `terraform plan` / dry-run against every module first. A minimal re
 - MkDocs: Backstage user guide, self-service templates guide, approval workflow documentation
 - ADR-005 (Backstage), plus a new ADR documenting the PR/CODEOWNERS approval mechanism
 
-### Dependencies
+### Dependencies - M2
 
 - **Depends on:** M1
 - **Prerequisites:** Backstage + Postgres, Log Analytics, Key Vault (all M1)
@@ -104,7 +104,7 @@ Validated in `terraform plan` / dry-run against every module first. A minimal re
 - MkDocs: observability runbook, incident response guide
 - New ADR: Observability & Auto-Remediation scope for the MVP (why only one runbook, why Dynamic Thresholds over a custom ML model)
 
-### Dependencies
+### Dependencies - M3
 
 - **Depends on:** M1, M2
 - **Prerequisites:** Log Analytics, Automation Account (M1), App Service (M2)
