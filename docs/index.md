@@ -22,7 +22,7 @@ It focuses on getting two things right first:
 ## Current status
 
 | Component | Status |
-|---|---|
+| --- | --- |
 | Landing Zone Terraform modules (governance, networking, security, observability) | 🚧 In Progress |
 | DevSecOps validation pipeline | ✅ Implemented |
 | Backstage self-service portal (subscription + VNet vending) | 📅 Planned |
@@ -33,7 +33,7 @@ It focuses on getting two things right first:
 ## Navigate
 
 | Section | What's there |
-|---|---|
+| --- | --- |
 | [Architecture](architecture/overview.md) | System diagram, security layers, team ownership model |
 | [Roadmap](roadmap.md) | Detailed scope for M1, M2, M3 |
 | [DevSecOps Pipeline](platform-engineering/devsecops-pipeline.md) | What runs on every PR, and why |
