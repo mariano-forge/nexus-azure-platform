@@ -17,10 +17,15 @@ An ADR documents a significant architectural decision that has been made for the
 |-----|----------|--------|
 | [ADR-001](001-why-terraform.md) | Why Terraform over Bicep/Pulumi? | ✅ Accepted |
 | [ADR-002](002-why-hub-spoke.md) | Why Hub & Spoke topology? | ✅ Accepted |
-| [ADR-003](003-why-github-actions.md) | Why GitHub Actions over Azure DevOps? | 🚧 Draft |
+| [ADR-003](003-why-github-actions.md) | Why GitHub Actions over Azure DevOps? | ✅ Accepted |
 | [ADR-004](004-why-private-endpoints.md) | Why Private Endpoints and no Azure Firewall? | ✅ Accepted |
 | [ADR-005](005-why-backstage.md) | Why Backstage for the IDP? | 🚧 Draft |
-| [ADR-006](006-why-argocd.md) | Why ArgoCD for GitOps? | 🚧 Draft |
+| [ADR-006](006-why-argocd.md) | Why ArgoCD for GitOps? | 💡 Future — not in current roadmap |
+| [ADR-007](007-separation-network-security.md) | Separation of Duties — Network vs Security | ✅ Accepted |
+| [ADR-008](008-team-structure-governance.md) | Team Structure and Governance Model | ✅ Accepted |
+| [ADR-009](009-key-vault-separation.md) | Key Vault Separation — pipeline vs app secrets | ✅ Accepted |
+| [ADR-010](010-terraform-bootstrap-strategy.md) | Terraform Bootstrap Strategy | ✅ Accepted |
+| [ADR-011](011-dependency-management-strategy.md) | Dependency Management — AVM pinning + Dependabot | ✅ Accepted |
 
 ## How to create a new ADR
 
@@ -35,4 +40,4 @@ When contributing a significant architectural change, please create an ADR to do
 
 ---
 
-*Last updated: 2026-07-21*
+*Last updated: 2026-07-29*

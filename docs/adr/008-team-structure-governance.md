@@ -181,7 +181,7 @@ This decision should be revisited if:
 
 ## Related ADRs
 
-- [ADR-007 (planned)](007-why-network-security-split.md) : Will provide detailed justification for splitting Network and Security into separate teams.
+- [ADR-007](007-separation-network-security.md) : Detailed justification for splitting Network and Security into separate teams.
 - [ADR-002](002-why-hub-spoke.md) : Network team owns the Hub & Spoke topology.
 - [ADR-004](004-why-private-endpoints.md) : Security team owns Key Vault and Private Endpoints.
 - [ADR-003](003-why-github-actions.md) : Platform Engineering team owns the CI/CD pipelines.

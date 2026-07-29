@@ -1,0 +1,67 @@
+# Terraform
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+
+# Terraform variable files (may contain secrets)
+*.tfvars
+*.tfvars.json
+!*.tfvars.example
+!*.tfvars.json.example
+
+# Terraform plan output
+*.tfplan
+tfplan
+
+# Terraform test
+*.tftest.hcl.out
+
+# Azure CLI
+.azure/
+
+# Secrets & credentials
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+.env
+.env.*
+!.env.example
+
+# MkDocs build output
+site/
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Node.js (Backstage — M2)
+node_modules/
+npm-debug.log*
+yarn-error.log
+
+# Python (runbooks — M3)
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+dist/
+
+# OS
+.DS_Store
