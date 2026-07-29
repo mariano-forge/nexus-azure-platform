@@ -37,12 +37,14 @@ Explain why this decision was made. Provide evidence and reasoning.
 | **Criteria 1** | ✅ | ❌ | ⚠️ |
 | **Criteria 2** | ... | ... | ... |
 
-> **Example:**  
+> **Example:**
+>
 > | Criteria | GitHub Actions | Azure DevOps |
 > | :--- | :--- | :--- |
 > | **Native Integration** | ✅ Code and pipelines in one place | ❌ Requires separate project |
 > | **Cost** | ✅ Free for public repos | ❌ Costs scale with usage |
 > | **Backstage Integration** | ✅ Native plugin | ❌ Custom integration required |
+>
 
 ---
 
