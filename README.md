@@ -16,7 +16,7 @@
 [![Terraform](https://img.shields.io/badge/IaC-Terraform-7B42BC)](https://www.terraform.io/)
 [![Azure](https://img.shields.io/badge/Cloud-Azure-0078D4)](https://azure.microsoft.com)
 [![Backstage](https://img.shields.io/badge/IDP-Backstage-9B59B6)](https://backstage.io/)
-[![Status](https://img.shields.io/badge/Status-Early%20Stage-orange.svg)]()
+![Status](https://img.shields.io/badge/Status-Early%20Stage-orange.svg)
 [![Docs](https://img.shields.io/badge/docs-mkdocs-blue.svg)](https://mariano-forge.github.io/nexus-azure-platform/)
 
 </div>
@@ -50,7 +50,7 @@ This project intentionally does **not** try to be a full internal developer plat
 1. A landing zone that is actually deployed and actually secured.
 2. A self-service portal that actually provisions real resources through a real approval workflow.
 
-Everything else — GitOps, a FinOps dashboard plugin, an AI assistant — is documented as a **future direction**, not a current deliverable (see [Beyond this repo](#beyond-this-repo)).
+Everything else — GitOps, a FinOps dashboard plugin, an AI assistant — is documented as a **future direction**, not a current deliverable (see [Beyond this repo](#beyond-this-repo-design-only-not-implemented)).
 
 ---
 
