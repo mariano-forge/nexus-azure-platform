@@ -1,0 +1,76 @@
+site_name: Nexus Azure Platform
+site_description: >-
+  A reference implementation of a secure, self-service Azure Landing Zone —
+  with every architectural decision documented and justified.
+site_author: Mariano Gbego
+site_url: https://mariano-forge.github.io/nexus-azure-platform/
+repo_url: https://github.com/mariano-forge/nexus-azure-platform
+repo_name: mariano-forge/nexus-azure-platform
+copyright: Copyright &copy; 2026 Mariano Gbego &mdash; Apache 2.0
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.tracking
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+plugins:
+  - search
+
+markdown_extensions:
+  - tables
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - attr_list
+  - md_in_html
+
+nav:
+  - Home: index.md
+  - Architecture:
+      - Overview: architecture/overview.md
+  - Roadmap: roadmap.md
+  - Platform Engineering:
+      - DevSecOps Pipeline: platform-engineering/devsecops-pipeline.md
+      - Dependency Management: platform-engineering/dependency-management.md
+  - Architecture Decision Records:
+      - Overview: adr/index.md
+      - IaC & CI/CD:
+          - "ADR-001 · Terraform": adr/001-why-terraform.md
+          - "ADR-003 · GitHub Actions": adr/003-why-github-actions.md
+          - "ADR-011 · Dependency Management": adr/011-dependency-management-strategy.md
+      - Networking & Security:
+          - "ADR-002 · Hub & Spoke": adr/002-why-hub-spoke.md
+          - "ADR-004 · Private Endpoints": adr/004-why-private-endpoints.md
+          - "ADR-007 · Network/Security Separation": adr/007-separation-network-security.md
+          - "ADR-009 · Key Vault Separation": adr/009-key-vault-separation.md
+      - Governance:
+          - "ADR-008 · Team Structure": adr/008-team-structure-governance.md
+          - "ADR-010 · Bootstrap Strategy": adr/010-terraform-bootstrap-strategy.md
+      - Developer Experience:
+          - "ADR-005 · Backstage": adr/005-why-backstage.md
+          - "ADR-006 · ArgoCD (future)": adr/006-why-argocd.md
+  - Contributing:
+      - Guide: contributing/guide.md
+      - ADR Template: adr/_template.md
