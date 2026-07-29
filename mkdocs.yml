@@ -9,6 +9,8 @@ repo_url: https://github.com/mariano-forge/nexus-azure-platform
 repo_name: mariano-forge/nexus-azure-platform
 copyright: Copyright &copy; 2026 Mariano Gbego &mdash; Apache 2.0
 
+strict: true
+
 theme:
   name: material
   palette:
@@ -40,7 +42,11 @@ markdown_extensions:
   - tables
   - admonition
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite

@@ -90,7 +90,7 @@ List the alternatives that were considered and explain why they were rejected.
 
 ## Related ADRs
 
-- [ADR-NNN](NNN-topic.md) : Brief description of how it relates.
+- `ADR-NNN` — Brief description of how it relates (e.g. `009-key-vault-separation.md`)
 
 ---
 

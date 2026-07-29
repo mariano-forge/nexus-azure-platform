@@ -17,6 +17,7 @@
 [![Azure](https://img.shields.io/badge/Cloud-Azure-0078D4)](https://azure.microsoft.com)
 [![Backstage](https://img.shields.io/badge/IDP-Backstage-9B59B6)](https://backstage.io/)
 [![Status](https://img.shields.io/badge/Status-Early%20Stage-orange.svg)]()
+[![Docs](https://img.shields.io/badge/docs-mkdocs-blue.svg)](https://mariano-forge.github.io/nexus-azure-platform/)
 
 </div>
 
