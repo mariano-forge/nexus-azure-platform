@@ -3,7 +3,7 @@
 Every Pull Request to `main` triggers the following validation pipeline — [`pr-validation.yml`](https://github.com/mariano-forge/nexus-azure-platform/blob/main/.github/workflows/pr-validation.yml):
 
 | Step | Tool | Status | Purpose |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 1 | Super Linter (tflint, Markdown, YAML, JSON) | ✅ Active | Style and lint |
 | 2 | Terraform `fmt` / `validate` | ✅ Active | Formatting and syntax |
 | 3 | tfsec | 🚧 M1 | Fast infra security scan |

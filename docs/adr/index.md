@@ -14,7 +14,7 @@ An ADR documents a significant architectural decision that has been made for the
 ## ADR List
 
 | ADR | Decision | Status |
-|-----|----------|--------|
+| --- | --- | --- |
 | [ADR-001](001-why-terraform.md) | Why Terraform over Bicep/Pulumi? | ✅ Accepted |
 | [ADR-002](002-why-hub-spoke.md) | Why Hub & Spoke topology? | ✅ Accepted |
 | [ADR-003](003-why-github-actions.md) | Why GitHub Actions over Azure DevOps? | ✅ Accepted |

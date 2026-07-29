@@ -38,7 +38,7 @@ This is the one rule that matters most here — the project's value is as much i
 
 [Conventional Commits](https://www.conventionalcommits.org/):
 
-```
+```text
 feat(terraform): add hub-spoke networking module
 docs(adr): add ADR-009
 fix(pipeline): correct Checkov config path
@@ -62,7 +62,7 @@ CI will additionally run Super Linter, tfsec, Checkov, Trivy, and Gitleaks — a
 
 ## Security issues
 
-Please don't open a public issue for a suspected vulnerability. Email **gbegomariano@gmail.com** with a description, reproduction steps, and impact — I'll get back to you as soon as I can (no fixed SLA at this stage, given this is a solo-maintained project).
+Please don't open a public issue for a suspected vulnerability. Email [gbegomariano@gmail.com](mailto:gbegomariano@gmail.com) with a description, reproduction steps, and impact — I'll get back to you as soon as I can (no fixed SLA at this stage, given this is a solo-maintained project).
 
 ---
 

@@ -28,7 +28,7 @@
 ## Security by design
 
 | Layer | Implementation |
-|---|---|
+| --- | --- |
 | **Infrastructure** | Azure Policy (Deny mode), CIS Benchmark alignment, NSG micro-segmentation |
 | **Identity** | Managed Identity, RBAC/PIM on critical resources |
 | **Secrets** | Two dedicated Key Vaults (pipeline vs app — see [ADR-009](../adr/009-key-vault-separation.md)) — no static credentials in pipelines |
@@ -55,7 +55,7 @@ Key choices:
 Four teams own distinct platform domains, enforced via GitHub CODEOWNERS — see [ADR-007](../adr/007-separation-network-security.md) and [ADR-008](../adr/008-team-structure-governance.md):
 
 | Team | Domain | Key resources |
-|---|---|---|
+| --- | --- | --- |
 | `governance` | Cloud governance | Management Groups, Azure Policies, root RBAC |
 | `network` | Connectivity | Hub & Spoke VNets, Private DNS, NSGs |
 | `security` | Security & compliance | Key Vault, Defender for Cloud, PIM |
