@@ -1,0 +1,18 @@
+# ============================================================
+# Stage 0 — Bootstrap
+# Copy to terraform.tfvars and fill in the values.
+# ============================================================
+
+# Azure subscription ID (az account show --query id -o tsv)
+subscription_id = "00000000-0000-0000-0000-000000000000"
+
+# Region — must be consistent across all stages
+location = "francecentral"
+
+# Short prefix for resource names
+prefix = "nexus"
+
+# Additional tags (optional)
+# tags = {
+#   owner = "platform-team"
+# }

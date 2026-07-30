@@ -1,4 +1,4 @@
-# Variables pour la configuration de la Landing Zone
+# Variables for the Landing Zone configuration
 
 variable "root_id" {
   description = "Prefix for all management group IDs. Must match the 'name' field in the architecture definition JSON (see lib/architecture_definition/). Run scripts/setup-lib.ps1 to regenerate that file for a new prefix."
@@ -23,22 +23,22 @@ variable "management_groups_config" {
 }
 
 variable "default_location" {
-  description = "Location par défaut pour les ressources (identités managées pour les policies)"
+  description = "Default Azure region for resources (managed identities created by policies)."
   type        = string
   default     = "francecentral"
 }
 
 variable "enable_telemetry" {
-  description = "Active ou désactive la télémétrie Microsoft"
+  description = "Enable or disable Microsoft telemetry for AVM modules."
   type        = bool
   default     = false
 }
 
-# Placement des subscriptions dans les management groups
+# Map of subscriptions to place under management groups
 variable "subscription_placement" {
   description = <<DESCRIPTION
-Map des subscriptions à placer dans les management groups.
-Exemple:
+Map of subscriptions to place under management groups.
+Example:
 {
   "prod-sub-1" = {
     subscription_id       = "00000000-0000-0000-0000-000000000000"
@@ -53,11 +53,11 @@ DESCRIPTION
   default = {}
 }
 
-# Modifications des policy assignments
+# Overrides for ALZ policy assignments
 variable "policy_assignments_to_modify" {
   description = <<DESCRIPTION
-Modifications à apporter aux policy assignments de l'architecture ALZ standard.
-Vous ne devez spécifier que les propriétés que vous souhaitez modifier.
+Overrides to apply on top of the standard ALZ policy assignments.
+Only specify the properties you want to change.
 DESCRIPTION
   type = map(object({
     policy_assignments = map(object({
@@ -93,11 +93,11 @@ DESCRIPTION
   default = {}
 }
 
-# Valeurs par défaut pour les paramètres de policies
+# Default values for policy parameters
 variable "policy_default_values" {
   description = <<DESCRIPTION
-Valeurs par défaut pour les paramètres de policies.
-Exemple:
+Default parameter values injected into ALZ policy assignments.
+Example:
 {
   "emailSecurityContact" = jsonencode({ value = "security@example.com" })
   "logAnalyticsWorkspaceId" = jsonencode({ value = "/subscriptions/.../resourceGroups/.../providers/Microsoft.OperationalInsights/workspaces/..." })
@@ -107,11 +107,11 @@ DESCRIPTION
   default     = {}
 }
 
-# Role assignments au niveau management group
+# Role assignments at management group scope
 variable "management_group_role_assignments" {
   description = <<DESCRIPTION
-Role assignments à créer au niveau des management groups.
-Exemple:
+Role assignments to create at management group scope.
+Example:
 {
   "reader-assignment-1" = {
     management_group_name      = "alz"

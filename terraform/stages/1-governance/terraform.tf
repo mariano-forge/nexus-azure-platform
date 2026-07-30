@@ -1,4 +1,4 @@
-# Configuration Terraform et Providers
+# Terraform and provider configuration
 terraform {
   required_version = ">= 1.13, < 2.0"
 
@@ -25,8 +25,7 @@ terraform {
     }
   }
 
-  # Configuration du backend pour stocker l'état Terraform
-  # Décommentez et configurez selon votre besoin
+  # Remote backend — uncomment and fill in after running stage 0-bootstrap.
   # backend "azurerm" {
   #   resource_group_name  = "rg-terraform-state"
   #   storage_account_name = "sttfstate"

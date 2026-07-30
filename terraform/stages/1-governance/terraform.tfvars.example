@@ -1,5 +1,5 @@
 # ============================================================
-# Stage 0 — Governance
+# Stage 1 — Governance
 # Copy to terraform.tfvars and fill in your values.
 # Run scripts/setup-lib.ps1 (or setup-lib.sh) first with the
 # same management_groups_config flags as below.
