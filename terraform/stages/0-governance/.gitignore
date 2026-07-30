@@ -1,0 +1,41 @@
+# Terraform
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tfvars
+!terraform.tfvars.example
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# ALZ Library (downloaded by provider)
+.alzlib/
+
+# Audit reports
+audit-reports/
+
+# Azure CLI
+.azure/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# PowerShell
+import-commands.ps1
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backups
+backup-state-*.json
+*.backup

@@ -1,0 +1,86 @@
+{
+  "name": "mariano-forge",
+  "management_groups": [
+    {
+      "archetypes": [
+        "root_override"
+      ],
+      "display_name": "mariano-forge ALZ root",
+      "exists": false,
+      "id": "mariano-forge",
+      "parent_id": null
+    },
+    {
+      "archetypes": [
+        "landing_zones_override"
+      ],
+      "display_name": "mariano-forge Landing zones",
+      "exists": false,
+      "id": "mariano-forge-landingzones",
+      "parent_id": "mariano-forge"
+    },
+    {
+      "archetypes": [
+        "corp_override"
+      ],
+      "display_name": "mariano-forge Corp",
+      "exists": false,
+      "id": "mariano-forge-corp",
+      "parent_id": "mariano-forge-landingzones"
+    },
+    {
+      "archetypes": [
+        "online_override"
+      ],
+      "display_name": "mariano-forge Online",
+      "exists": false,
+      "id": "mariano-forge-online",
+      "parent_id": "mariano-forge-landingzones"
+    },
+    {
+      "archetypes": [
+        "platform_override"
+      ],
+      "display_name": "mariano-forge Platform",
+      "exists": false,
+      "id": "mariano-forge-platform",
+      "parent_id": "mariano-forge"
+    },
+    {
+      "archetypes": [
+        "sandbox_override"
+      ],
+      "display_name": "mariano-forge Sandboxes",
+      "exists": false,
+      "id": "mariano-forge-sandboxes",
+      "parent_id": "mariano-forge"
+    },
+    {
+      "archetypes": [
+        "management_override"
+      ],
+      "display_name": "mariano-forge Management",
+      "exists": false,
+      "id": "mariano-forge-management",
+      "parent_id": "mariano-forge-platform"
+    },
+    {
+      "archetypes": [
+        "connectivity_override"
+      ],
+      "display_name": "mariano-forge Connectivity",
+      "exists": false,
+      "id": "mariano-forge-connectivity",
+      "parent_id": "mariano-forge-platform"
+    },
+    {
+      "archetypes": [
+        "identity_override"
+      ],
+      "display_name": "mariano-forge Identity",
+      "exists": false,
+      "id": "mariano-forge-identity",
+      "parent_id": "mariano-forge-platform"
+    }
+  ]
+}
