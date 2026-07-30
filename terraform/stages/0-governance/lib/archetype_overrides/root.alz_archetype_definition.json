@@ -1,0 +1,10 @@
+{
+  "name": "root_override",
+  "policy_assignments": [
+    "Audit-Tags-Mandatory",
+    "Audit-Tags-Mandatory-Rg"
+  ],
+  "policy_definitions": [],
+  "policy_set_definitions": [],
+  "role_definitions": []
+}

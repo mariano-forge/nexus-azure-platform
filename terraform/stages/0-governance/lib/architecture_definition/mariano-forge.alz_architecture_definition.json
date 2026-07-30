@@ -3,6 +3,7 @@
   "management_groups": [
     {
       "archetypes": [
+        "root",
         "root_override"
       ],
       "display_name": "mariano-forge ALZ root",
@@ -12,6 +13,7 @@
     },
     {
       "archetypes": [
+        "landing_zones",
         "landing_zones_override"
       ],
       "display_name": "mariano-forge Landing zones",
@@ -21,6 +23,7 @@
     },
     {
       "archetypes": [
+        "corp",
         "corp_override"
       ],
       "display_name": "mariano-forge Corp",
@@ -30,6 +33,7 @@
     },
     {
       "archetypes": [
+        "online",
         "online_override"
       ],
       "display_name": "mariano-forge Online",
@@ -39,6 +43,17 @@
     },
     {
       "archetypes": [
+        "local",
+        "local_override"
+      ],
+      "display_name": "mariano-forge Local",
+      "exists": false,
+      "id": "mariano-forge-local",
+      "parent_id": "mariano-forge-landingzones"
+    },
+    {
+      "archetypes": [
+        "platform",
         "platform_override"
       ],
       "display_name": "mariano-forge Platform",
@@ -48,7 +63,8 @@
     },
     {
       "archetypes": [
-        "sandbox_override"
+        "sandbox",
+        "sandboxes_override"
       ],
       "display_name": "mariano-forge Sandboxes",
       "exists": false,
@@ -57,6 +73,7 @@
     },
     {
       "archetypes": [
+        "management",
         "management_override"
       ],
       "display_name": "mariano-forge Management",
@@ -66,6 +83,7 @@
     },
     {
       "archetypes": [
+        "connectivity",
         "connectivity_override"
       ],
       "display_name": "mariano-forge Connectivity",
@@ -75,12 +93,33 @@
     },
     {
       "archetypes": [
+        "security",
+        "security_override"
+      ],
+      "display_name": "mariano-forge Security",
+      "exists": false,
+      "id": "mariano-forge-security",
+      "parent_id": "mariano-forge-platform"
+    },
+    {
+      "archetypes": [
+        "identity",
         "identity_override"
       ],
       "display_name": "mariano-forge Identity",
       "exists": false,
       "id": "mariano-forge-identity",
       "parent_id": "mariano-forge-platform"
+    },
+    {
+      "archetypes": [
+        "decommissioned",
+        "decommissioned_override"
+      ],
+      "display_name": "mariano-forge Decommissioned",
+      "exists": false,
+      "id": "mariano-forge-decommissioned",
+      "parent_id": "mariano-forge"
     }
   ]
 }

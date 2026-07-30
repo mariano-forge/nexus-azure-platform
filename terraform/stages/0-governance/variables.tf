@@ -1,5 +1,27 @@
 # Variables pour la configuration de la Landing Zone
 
+variable "root_id" {
+  description = "Prefix for all management group IDs. Must match the 'name' field in the architecture definition JSON (see lib/architecture_definition/). Run scripts/setup-lib.ps1 to regenerate that file for a new prefix."
+  type        = string
+
+  validation {
+    condition     = can(regex("^[a-z][a-z0-9-]{1,30}[a-z0-9]$", var.root_id))
+    error_message = "root_id must be 3-32 lowercase alphanumeric characters or hyphens, start with a letter, and not end with a hyphen."
+  }
+}
+
+variable "management_groups_config" {
+  description = "Control which optional management groups are included. Re-run scripts/setup-lib.ps1 with the same flags when changing these."
+  type = object({
+    include_identity       = optional(bool, true)
+    include_decommissioned = optional(bool, true)
+    include_local          = optional(bool, true)
+    include_sandboxes      = optional(bool, true)
+    include_security       = optional(bool, true)
+  })
+  default = {}
+}
+
 variable "default_location" {
   description = "Location par défaut pour les ressources (identités managées pour les policies)"
   type        = string
@@ -115,9 +137,9 @@ DESCRIPTION
 
 
 variable "default_management_group_name" {
-  description = "Nom du management group par défaut pour les subscriptions sans placement spécifique"
+  description = "MG where unplaced subscriptions land. Defaults to the sandboxes MG derived from root_id."
   type        = string
-  default     = "mariano-sandboxes"
+  default     = null
 }
 
 # variable "mandatory_corporate_tags" {

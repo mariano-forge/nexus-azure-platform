@@ -1,0 +1,30 @@
+{
+    "type": "Microsoft.Authorization/policyAssignments",
+    "apiVersion": "2024-04-01",
+    "name": "Audit-Tags-Mandatory",
+    "dependsOn": [],
+    "properties": {
+        "description": "Audits resources to ensure they have required tags based on tag array. Does not apply to resource groups.",
+        "displayName": "Audit for mandatory tags on resources",
+        "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/placeholder/providers/Microsoft.Authorization/policyDefinitions/Audit-Tags-Mandatory",
+        "enforcementMode": "Default",
+        "nonComplianceMessages": [
+            {
+                "message": "Resources {enforcementMode} have the required tags."
+            }
+        ],
+        "parameters": {
+            "effect": {
+                "value": "Audit"
+            },
+            "mandatoryTags": {
+                "value": [
+                    "owner",
+                    "costcenter"
+                ]
+            }
+        },
+        "scope": "/providers/Microsoft.Management/managementGroups/placeholder",
+        "notScopes": []
+    }
+}
