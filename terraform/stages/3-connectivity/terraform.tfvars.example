@@ -1,0 +1,9 @@
+prefix           = "nexus"
+location         = "francecentral"
+hub_address_space = "10.0.0.0/16"
+
+tags = {
+  managed-by  = "terraform"
+  stage       = "connectivity"
+  environment = "platform"
+}

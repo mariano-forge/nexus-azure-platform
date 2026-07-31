@@ -1,0 +1,38 @@
+# Example subscription request — copy and rename to {alias}.yaml to submit.
+# File name = subscription alias (must be unique across the tenant).
+# This file is excluded from Terraform processing (name starts with _example).
+
+# Required
+subscription_display_name: "Project Phoenix - Dev"
+subscription_management_group_id: mariano-forge-landingzones-corp
+subscription_workload: DevTest  # DevTest | Production
+
+# Required tags (enforced by Azure Policy — owner drives budget alert emails)
+subscription_tags:
+  environment: dev
+  costCenter: CC-1234
+  owner: dev@example.com
+  application: project-phoenix
+
+# Optional: budget alert. Disabled by default.
+# If budget_enabled is true, at least one entry under 'budgets' is required.
+# budget_enabled: true
+# budgets:
+#   monthly:
+#     amount: 200
+#     time_grain: Monthly
+#     time_period:
+#       start_date: "2026-01-01T00:00:00Z"
+#     notifications:
+#       alert-80-actual:
+#         enabled: true
+#         operator: GreaterThan
+#         threshold: 80
+#         threshold_type: Actual
+#         contact_emails: [team@example.com]
+#       alert-100-forecasted:
+#         enabled: true
+#         operator: GreaterThan
+#         threshold: 100
+#         threshold_type: Forecasted
+#         contact_emails: [team@example.com]

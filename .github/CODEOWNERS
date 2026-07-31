@@ -41,6 +41,11 @@
 /terraform/environments/prod/ @mariano-forge/governance @mariano-forge/network @mariano-forge/security @mariano-forge/platform-engineering
 
 # ─────────────────────────────────────────────────────────────
+# Subscription Vending — platform-team gates every request and the IaC module
+# ─────────────────────────────────────────────────────────────
+/terraform/stages/2-sub-vending/ @mariano-forge/platform-team
+
+# ─────────────────────────────────────────────────────────────
 # Critical files — all teams required
 # ─────────────────────────────────────────────────────────────
 /.github/ @mariano-forge/governance @mariano-forge/network @mariano-forge/security @mariano-forge/platform-engineering
