@@ -72,7 +72,7 @@ Run `terraform init -reconfigure` inside `1-governance/` to migrate to the remot
 Each subsequent stage uses the **same Storage Account** with a different `key`:
 
 | Stage | `key` |
-|---|---|
+| --- | --- |
 | 1-governance | `1-governance.tfstate` |
 | 2-connectivity | `2-connectivity.tfstate` |
 | 3-security | `3-security.tfstate` |

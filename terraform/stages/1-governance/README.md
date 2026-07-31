@@ -12,7 +12,7 @@
 | ALZ policy assignments | **All standard ALZ assignments disabled at MVP** via `creation_enabled = false` — see [ADR-013](../../../docs/adr/013-policy-catalog-vs-assignment-scope.md) |
 | Custom tag-audit assignments | `Audit-Tags-Mandatory` + `Audit-Tags-Mandatory-Rg` at root — enforces `owner` and `costcenter` tags on all resources |
 
-The management group hierarchy is driven by a static JSON file (`lib/architecture_definition/<root_id>.alz_architecture_definition.json`) that must be generated before the first `terraform plan`. See [Before first run](#before-first-run).
+The management group hierarchy is driven by a static JSON file (`lib/architecture_definition/<root_id>.alz_architecture_definition.json`) that must be generated before the first `terraform plan`. See [Before first run](#before-first-run--generate-the-architecture-definition).
 
 ## Prerequisites
 
