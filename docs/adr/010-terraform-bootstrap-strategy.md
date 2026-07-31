@@ -18,6 +18,7 @@ This creates a chicken-and-egg problem: the storage account and initial Key Vaul
 ## Decision
 
 We will use a **minimal, one-time bootstrap step**, run manually (or via a dedicated, rarely-run GitHub Actions workflow) with **local state**, whose only job is to create:
+
 - The Storage Account + Container that will host the remote backend for every other stage.
 - The initial Key Vault (`kv-platform-pipeline`, see [ADR-009](009-key-vault-separation.md)) used to store the credentials the pipeline needs going forward.
 
@@ -39,10 +40,12 @@ The bootstrap's own state file is kept local (not remote) and is treated as a ra
 ## Consequences
 
 ### Positive
+
 - The entire platform, including its own foundation, is expressed in Terraform — no undocumented manual `az` commands.
 - The bootstrap folder is small, isolated, and clearly marked as "run once, rarely touched again" in its own README.
 
 ### Negative
+
 - The bootstrap state is local, meaning it isn't automatically backed up the way remote state is — this is mitigated by committing the bootstrap output values (resource IDs) to documentation immediately after running it, and by the fact that this step recreates cheap, non-critical resources if ever lost.
 - Anyone reproducing this project from scratch needs to know to run the bootstrap step first — documented explicitly in the README's "Getting Started" section, before the per-stage `terraform init`.
 

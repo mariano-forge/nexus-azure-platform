@@ -1,7 +1,8 @@
 # ADR-012: AVM Pattern Modules for Governance and Subscription Vending
-**Status:** Accepted
-**Date:** 2026-07-25
-**Author:** Mariano Gbego
+
+**Status:** ✅ Accepted  
+**Date:** 2026-07-25 
+**Author:** Mariano Gbego  
 **Context:** Nexus Azure Platform
 
 ---
@@ -11,6 +12,7 @@
 Stage `0-governance` needs to create a management group hierarchy with policy assignments/definitions, and stage `5-workloads` needs to provision real Azure subscriptions on demand through the Backstage self-service portal (see [ADR-005](005-why-backstage.md)).
 
 Both could be hand-written in Terraform directly against `azurerm`/`azapi` resources. However, Microsoft publishes and maintains **Azure Verified Modules (AVM)** — including two **pattern modules** purpose-built for exactly these two problems:
+
 - `Azure/avm-ptn-alz/azurerm` — management group hierarchy and policy assignment/definition management.
 - `Azure/avm-ptn-alz-sub-vending/azure` — subscription creation, management group association, resource provider registration, RBAC assignment, and budget enforcement in a single module.
 
@@ -41,11 +43,13 @@ Resource-level concerns not covered by these pattern modules — networking (Hub
 ## Consequences
 
 ### Positive
+
 - Significantly less custom Terraform to write, review, and maintain for governance and subscription vending.
 - Budget-per-subscription (a requirement from M2) comes for free from `avm-ptn-alz-sub-vending`, with no custom `azurerm_consumption_budget` logic to test.
 - Aligns the project with the approach Microsoft itself documents for enterprise-scale landing zones — a stronger signal of correctness than an independently written equivalent.
 
 ### Negative
+
 - Adds a dependency on two more upstream modules whose release cadence isn't controlled by this project — mitigated by the pinned-version + Dependabot strategy already in place (ADR-011).
 - `avm-ptn-alz` covers governance only — it does **not** replace the need for hand-wrapped resource modules for networking and Key Vault; this must stay clear in the module documentation to avoid the false impression that "using AVM" means everything is pattern-module-driven.
 - `avm-ptn-alz-sub-vending` requires a real MCA billing scope; this decision is a dead end if the billing account type ever changes to something the module doesn't support.

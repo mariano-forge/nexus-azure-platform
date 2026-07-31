@@ -12,6 +12,7 @@
 The Nexus Azure Platform is designed to be adopted by enterprise organizations with multiple teams, each with distinct responsibilities. For the platform to be truly "enterprise-ready," it must embed governance not only in the code but also in the **organizational structure** that manages it.
 
 This ADR defines the **team structure**, **ownership model**, and **governance rules** that will be applied across the project. It establishes:
+
 - Which teams exist and why.
 - What each team owns.
 - How changes are reviewed and approved.
@@ -139,17 +140,20 @@ External contributors are not members of any team. Their PRs follow the standard
 ## Consequences
 
 ### Positive
+
 - **Clear ownership**: Every team knows exactly what they are responsible for.
 - **Stronger security posture**: Changes to critical infrastructure require multiple approvals.
 - **Adoption-friendly**: Companies with existing teams (SecOps, NetOps, Platform) can adopt the platform as-is.
 - **Compliance-ready**: Separation of duties aligns with PCI-DSS, SOC2, and ISO 27001 requirements.
 
 ### Negative
+
 - **Slightly more friction**: Some PRs may require reviews from multiple teams, slowing down velocity.
 - **Increased complexity**: The CODEOWNERS file becomes more granular and requires careful maintenance.
 - **Initial setup overhead**: Creating teams and configuring permissions takes time.
 
 ### Mitigation
+
 - For non-critical changes, the default owner (`@mariano-forge/platform-engineering`) can review and approve.
 - Use GitHub's CODEOWNERS feature to enforce reviews only on relevant paths.
 - Document the ownership model clearly in `CONTRIBUTING.md`.

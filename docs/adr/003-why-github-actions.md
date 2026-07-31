@@ -10,6 +10,7 @@
 ## Context
 
 We need a CI/CD orchestrator for the Nexus Azure Platform. The platform requires:
+
 - Infrastructure as Code validation (Terraform fmt, validate, plan)
 - Security scanning (tfsec, Checkov, Trivy, Gitleaks)
 - Manual approval gates before production apply
@@ -42,11 +43,13 @@ We will use **GitHub Actions**.
 ## Consequences
 
 ### Positive
+
 - **Single source of truth**: Code, issues, and pipelines are all in one place (GitHub).
 - **Open-source friendly**: Contributors don't need an Azure DevOps account; they just fork the repo.
 - **Modern standard**: GitHub Actions is the de-facto standard for open-source cloud projects (Kubernetes, Terraform itself use it).
 
 ### Negative
+
 - **Azure-native features**: Azure DevOps has deeper integration with some Azure PaaS services (e.g., Azure Boards, Azure Test Plans) which we don't use.
 - **Parallelism limits**: Free tier has limited parallelism, but for a single pipeline, this is not an issue.
 

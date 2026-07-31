@@ -124,7 +124,6 @@ To re-enable a policy, remove it from its list in `_mvp_disabled_assignments`, r
 
 ## References
 
-- [`terraform/stages/1-governance/locals.tf`](../../terraform/stages/1-governance/locals.tf) — live list of disabled assignments
 - [Azure Landing Zones policy library (alz-library)](https://github.com/Azure/Azure-Landing-Zones-Library)
 - [Azure/avm-ptn-alz (Terraform Registry)](https://registry.terraform.io/modules/Azure/avm-ptn-alz)
 

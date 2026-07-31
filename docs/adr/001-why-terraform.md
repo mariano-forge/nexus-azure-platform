@@ -12,6 +12,7 @@
 We need an Infrastructure as Code (IaC) tool to deploy and manage all Azure resources for the Nexus Azure Platform.
 
 The platform requires:
+
 - Declarative infrastructure definitions
 - State management (tracking what's deployed)
 - Modularity and reusability across environments (dev, staging, prod)
@@ -47,6 +48,7 @@ We will use **Terraform**.
 ## Consequences
 
 ### Positive
+
 - **Industry standard**: Terraform is the most widely adopted IaC tool in enterprise environments.
 - **Extensive ecosystem**: Vast collection of community modules, providers, and security tools.
 - **Multi-cloud flexibility**: Leaves the door open for future hybrid or multi-cloud strategies.
@@ -54,6 +56,7 @@ We will use **Terraform**.
 - **Comprehensive security tooling**: tfsec, Checkov, Trivy, and OPA/Conftest are all mature and well-integrated.
 
 ### Negative
+
 - **Learning curve**: HCL (HashiCorp Configuration Language) is declarative but requires learning.
 - **State management complexity**: Remote state backends (Azure Storage) require careful configuration to avoid state corruption.
 - **Plan/Apply latency**: Large deployments can take time to plan.

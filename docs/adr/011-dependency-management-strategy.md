@@ -36,11 +36,13 @@ We will use **Dependabot**, native to GitHub, configured via a single `.github/d
 ## Consequences
 
 ### Positive
+
 - Zero infrastructure to run or monitor — Dependabot executes entirely on GitHub's side.
 - Every version bump goes through the same review/approval path as any other change (PR + `pr-validation.yml` + manual merge), so no new process was introduced.
 - Security-update PRs are available natively, independent of the weekly schedule.
 
 ### Negative
+
 - Dependabot does not run functional or smoke tests of its own — a version bump is only validated by `terraform plan` plus manual review, not by an actual deployment. This is an accepted limitation for now (see [ADR-010](010-terraform-bootstrap-strategy.md) for the broader dry-run-first validation approach used across this project).
 - Less configurable than Renovate for advanced scenarios (grouping multiple updates into one PR, custom scheduling per package) — acceptable given the small number of dependencies actually tracked here.
 
