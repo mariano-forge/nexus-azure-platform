@@ -11,7 +11,8 @@
 
 The default `architecture_name` shipped with the AVM governance pattern module (`avm-ptn-alz`, see [ADR-012](012-avm-pattern-modules.md)) generates the full "enterprise-scale" archetype: 149 policy definitions, 42 policy set definitions, and 121 policy assignments (194 downstream policy role assignments) — 527 resources in total on a first `terraform plan`.
 
-Applying this as-is produced 70 `PolicyRoleAssignmentError` failures. All of them come from the same family of assignments (`Deploy-MCSB2-Monitoring` and related diagnostic-settings policies), which try to create role assignments scoped to a Log Analytics Workspace, an Event Hub authorization rule, or a Storage Account — none of which exist yet, because `3-observability` has not been deployed at the point `1-governance` is applied.
+Applying this as-is produced 70 `PolicyRoleAssignmentError` failures.
+All of them come from the same family of assignments (`Deploy-MCSB2-Monitoring` and related diagnostic-settings policies), which try to create role assignments scoped to a Log Analytics Workspace, an Event Hub authorization rule, or a Storage Account — none of which exist yet, because `3-observability` has not been deployed at the point `1-governance` is applied.
 
 Investigating the full set of failing and not-yet-failing assignments further revealed a broader issue: most of the 121 standard ALZ assignments either require infrastructure that doesn't exist yet (diagnostic destinations, MDFC plans, DDoS protection plans), or would enforce controls that the MVP platform isn't ready to comply with yet (network restrictions, encryption at rest requirements, etc.).
 
@@ -76,12 +77,14 @@ _mvp_disabled_assignments = merge(
 ## Consequences
 
 ### Positive
+
 - The repository ships a genuinely complete, enterprise-scale policy catalog — matching the original goal of letting anyone accelerate their own landing zone from it.
 - `1-governance` applies cleanly with zero role-assignment errors.
 - Re-enabling any policy is a one-line change in `locals.tf` — remove the entry from the relevant list.
 - The full list of what is deferred is explicit and auditable in `locals.tf`, not silently absent.
 
 ### Negative
+
 - The platform enforces virtually no Azure governance policy at MVP beyond the two custom tag-audit assignments. This must be stated clearly in the README's Project Status table.
 - `_mvp_disabled_assignments` is a manual list that must be maintained as the ALZ library evolves (new policies introduced by upstream `avm-ptn-alz` upgrades won't automatically be disabled).
 
