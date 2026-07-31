@@ -17,17 +17,16 @@ locals {
     var.management_groups_config.include_security ? { security = "${var.root_id}-security" } : {}
   )
 
-  # MVP: all standard ALZ policy assignments disabled — re-enable individually as the platform matures.
-  # To re-enable a policy, remove its entry from the relevant list below.
+  # Reviewed against ADR-013: only policies that depend on infrastructure not yet
+  # deployed (Log Analytics / Defender / Recovery Services Vault / Customer-Managed
+  # Keys) stay disabled. Pure deny/audit policies with no external dependency are
+  # enabled from day one. To re-enable a policy once its dependency lands
+  # (e.g. 3-observability ships a real Log Analytics Workspace), remove its entry
+  # from the relevant list below.
   _mvp_disabled_assignments = merge(
     {
       (local.mg.root) = [
-        "Audit-ResourceRGLocation",
-        "Audit-TrustedLaunch",
-        "Audit-UnusedResources",
-        "Audit-ZoneResiliency",
-        "Deny-Classic-Resources",
-        "Deny-UnmanagedDisk",
+        # Depend on Log Analytics / Defender for Cloud (not deployed until 3-observability)
         "Deploy-ASC-Monitoring",
         "Deploy-AzActivity-Log",
         "Deploy-Diag-LogsCat",
@@ -37,77 +36,40 @@ locals {
         "Deploy-MDFC-Config-H224",
         "Deploy-MDFC-OssDb",
         "Deploy-MDFC-SqlAtp",
+        # Depends on an Action Group / notification target not configured yet
         "Deploy-SvcHealth-BuiltIn",
+        # Depends on Guest Configuration / Automation, deferred with observability
         "Enforce-ACSB",
       ]
       (local.mg.connectivity) = [
+        # Cost decision (ADR-012), not a dependency gap — stays disabled deliberately
         "Enable-DDoS-VNET",
       ]
       (local.mg.corp) = [
-        "Audit-PeDnsZones",
-        "Deny-HybridNetworking",
-        "Deny-Public-Endpoints",
-        "Deny-Public-IP-On-NIC",
-        "Deploy-Private-DNS-Zones",
+        # Nothing disabled here — Deploy-Private-DNS-Zones, Deny-Public-Endpoints,
+        # Deny-Public-IP-On-NIC, Audit-PeDnsZones, Deny-HybridNetworking have no
+        # external dependency and are core to the Private Endpoints architecture (ADR-004).
       ]
       (local.mg.landingzones) = [
-        "Audit-AppGW-WAF",
-        "Deny-IP-forwarding",
-        "Deny-MgmtPorts-Internet",
-        "Deny-Priv-Esc-AKS",
-        "Deny-Privileged-AKS",
-        "Deny-Storage-http",
-        "Deny-Subnet-Without-Nsg",
+        # Depend on Log Analytics / Defender / Recovery Services Vault / ASR
         "Deploy-AzSqlDb-Auditing",
-        "Deploy-GuestAttest",
         "Deploy-MDFC-DefSQL-AMA",
-        "Deploy-SQL-TDE",
         "Deploy-SQL-Threat",
-        "Deploy-VM-Backup",
+        "Deploy-VM-Backup", # needs a Recovery Services Vault
         "Deploy-VM-ChangeTrack",
         "Deploy-VM-Monitoring",
         "Deploy-VMSS-ChangeTrack",
         "Deploy-VMSS-Monitoring",
         "Deploy-vmArc-ChangeTrack",
         "Deploy-vmHybr-Monitoring",
-        "Enable-AUM-CheckUpdates",
-        "Enable-DDoS-VNET",
-        "Enforce-AKS-HTTPS",
         "Enforce-ASR",
+        # Cost decision (ADR-012), same as connectivity
+        "Enable-DDoS-VNET",
+        # Needs a Customer-Managed Key configured per service — not in current scope
         "Enforce-Encrypt-CMK0",
-        "Enforce-GR-APIM0",
-        "Enforce-GR-AppServices0",
-        "Enforce-GR-Automation0",
-        "Enforce-GR-BotService0",
-        "Enforce-GR-CogServ0",
-        "Enforce-GR-Compute0",
-        "Enforce-GR-ContApps0",
-        "Enforce-GR-ContInst0",
-        "Enforce-GR-ContReg0",
-        "Enforce-GR-CosmosDb0",
-        "Enforce-GR-DataExpl0",
-        "Enforce-GR-DataFactory0",
-        "Enforce-GR-EventGrid0",
-        "Enforce-GR-EventHub0",
-        "Enforce-GR-KeyVault",
-        "Enforce-GR-KeyVaultSup0",
-        "Enforce-GR-Kubernetes0",
-        "Enforce-GR-MachLearn0",
-        "Enforce-GR-MySQL0",
-        "Enforce-GR-Network0",
-        "Enforce-GR-OpenAI0",
-        "Enforce-GR-PostgreSQL0",
-        "Enforce-GR-SQL0",
-        "Enforce-GR-ServiceBus0",
-        "Enforce-GR-Storage0",
-        "Enforce-GR-Synapse0",
-        "Enforce-GR-VirtualDesk0",
-        "Enforce-Subnet-Private",
-        "Enforce-TLS-SSL-Q225",
       ]
       (local.mg.platform) = [
-        "DenyAction-DeleteUAMIAMA",
-        "Deploy-GuestAttest",
+        # Same dependency-based exclusions as landingzones
         "Deploy-MDFC-DefSQL-AMA",
         "Deploy-VM-ChangeTrack",
         "Deploy-VM-Monitoring",
@@ -115,54 +77,21 @@ locals {
         "Deploy-VMSS-Monitoring",
         "Deploy-vmArc-ChangeTrack",
         "Deploy-vmHybr-Monitoring",
-        "Enable-AUM-CheckUpdates",
         "Enforce-ASR",
         "Enforce-Encrypt-CMK0",
-        "Enforce-GR-APIM0",
-        "Enforce-GR-AppServices0",
-        "Enforce-GR-Automation0",
-        "Enforce-GR-BotService0",
-        "Enforce-GR-CogServ0",
-        "Enforce-GR-Compute0",
-        "Enforce-GR-ContApps0",
-        "Enforce-GR-ContInst0",
-        "Enforce-GR-ContReg0",
-        "Enforce-GR-CosmosDb0",
-        "Enforce-GR-DataExpl0",
-        "Enforce-GR-DataFactory0",
-        "Enforce-GR-EventGrid0",
-        "Enforce-GR-EventHub0",
-        "Enforce-GR-KeyVault",
-        "Enforce-GR-KeyVaultSup0",
-        "Enforce-GR-Kubernetes0",
-        "Enforce-GR-MachLearn0",
-        "Enforce-GR-MySQL0",
-        "Enforce-GR-Network0",
-        "Enforce-GR-OpenAI0",
-        "Enforce-GR-PostgreSQL0",
-        "Enforce-GR-SQL0",
-        "Enforce-GR-ServiceBus0",
-        "Enforce-GR-Storage0",
-        "Enforce-GR-Synapse0",
-        "Enforce-GR-VirtualDesk0",
-        "Enforce-Subnet-Private",
       ]
     },
     # Optional MGs — only included when the MG exists in local.mg
     {
       for mg_key, assignments in {
         "identity" = [
-          "Deny-MgmtPorts-Internet",
-          "Deny-Public-IP", "Deny-Subnet-Without-Nsg",
+          # Same Recovery Services Vault gap as landingzones/platform
           "Deploy-VM-Backup"
         ]
-        "sandboxes" = [
-          "Enforce-ALZ-Sandbox"
-        ]
-        # decommissioned, local, security have no default ALZ policies to disable
-        "decommissioned" = [
-          "Enforce-ALZ-Decomm"
-        ]
+        "sandboxes"      = []
+        "decommissioned" = []
+        # Unverified policy name — confirm against the alz-library catalog before
+        # deciding; left disabled pending verification rather than assumed safe.
         "lz_local" = [
           "Enforce-ALDO-Services"
         ]
