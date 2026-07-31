@@ -1822,21 +1822,27 @@
 <hr />
 <h2 id="context">Context</h2>
 <p>We need to secure all network traffic for the Nexus Azure Platform, particularly access to PaaS services (Key Vault, Storage, Azure Monitor, etc.) and workload isolation.</p>
-<p>The platform must:
-- Keep all data private (no public internet exposure for PaaS services)
-- Enforce network segmentation and access control
-- Be <strong>cost-optimized</strong> for open-source contributors (MVP phase)
-- Allow future evolution to enterprise-grade network security</p>
-<p>The primary approaches considered:
-- <strong>Azure Firewall</strong> : Fully managed, stateful firewall with L3-L7 inspection, FQDN filtering, and threat intelligence.
-- <strong>NSGs + Private Endpoints</strong> : Network Security Groups for micro-segmentation + Private Endpoints to bring PaaS services into the VNet.
-- <strong>Service Endpoints</strong> : Expose PaaS services to the VNet via Azure backbone, but still use public IPs.</p>
+<p>The platform must:</p>
+<ul>
+<li>Keep all data private (no public internet exposure for PaaS services)</li>
+<li>Enforce network segmentation and access control</li>
+<li>Be <strong>cost-optimized</strong> for open-source contributors (MVP phase)</li>
+<li>Allow future evolution to enterprise-grade network security</li>
+</ul>
+<p>The primary approaches considered:</p>
+<ul>
+<li><strong>Azure Firewall</strong> : Fully managed, stateful firewall with L3-L7 inspection, FQDN filtering, and threat intelligence.</li>
+<li><strong>NSGs + Private Endpoints</strong> : Network Security Groups for micro-segmentation + Private Endpoints to bring PaaS services into the VNet.</li>
+<li><strong>Service Endpoints</strong> : Expose PaaS services to the VNet via Azure backbone, but still use public IPs.</li>
+</ul>
 <hr />
 <h2 id="decision">Decision</h2>
-<p>We will <strong>not</strong> deploy Azure Firewall in the MVP. Instead, we will use:
-- <strong>Private Endpoints</strong> : For all PaaS services (Key Vault, Storage, Azure Monitor, etc.) to make them entirely private.
-- <strong>NSGs (Network Security Groups)</strong> with Service Tags for micro-segmentation at the subnet level.
-- <strong>Deny all</strong> inbound/outbound rules by default, with explicit allow rules only where necessary.</p>
+<p>We will <strong>not</strong> deploy Azure Firewall in the MVP. Instead, we will use:</p>
+<ul>
+<li><strong>Private Endpoints</strong> : For all PaaS services (Key Vault, Storage, Azure Monitor, etc.) to make them entirely private.</li>
+<li><strong>NSGs (Network Security Groups)</strong> with Service Tags for micro-segmentation at the subnet level.</li>
+<li><strong>Deny all</strong> inbound/outbound rules by default, with explicit allow rules only where necessary.</li>
+</ul>
 <hr />
 <h2 id="rationale">Rationale</h2>
 <table>

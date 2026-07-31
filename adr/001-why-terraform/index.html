@@ -1766,13 +1766,15 @@
 <hr />
 <h2 id="context">Context</h2>
 <p>We need an Infrastructure as Code (IaC) tool to deploy and manage all Azure resources for the Nexus Azure Platform.</p>
-<p>The platform requires:
-- Declarative infrastructure definitions
-- State management (tracking what's deployed)
-- Modularity and reusability across environments (dev, staging, prod)
-- Integration with CI/CD pipelines
-- Security scanning capabilities
-- Support for Azure resources (AKS, VNet, Key Vault, Private Endpoints, etc.)</p>
+<p>The platform requires:</p>
+<ul>
+<li>Declarative infrastructure definitions</li>
+<li>State management (tracking what's deployed)</li>
+<li>Modularity and reusability across environments (dev, staging, prod)</li>
+<li>Integration with CI/CD pipelines</li>
+<li>Security scanning capabilities</li>
+<li>Support for Azure resources (AKS, VNet, Key Vault, Private Endpoints, etc.)</li>
+</ul>
 <p>The primary candidates are <strong>Terraform</strong>, <strong>Bicep</strong>, and <strong>Pulumi</strong>.</p>
 <hr />
 <h2 id="decision">Decision</h2>

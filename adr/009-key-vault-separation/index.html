@@ -1773,9 +1773,11 @@
 </ul>
 <hr />
 <h2 id="decision">Decision</h2>
-<p>We will use <strong>two separate Key Vaults</strong>:
-- <code>kv-platform-pipeline</code> (stage <code>2-security</code>) — holds Terraform backend secrets, GitHub tokens used by CI/CD.
-- <code>kv-backstage-app</code> (stage <code>4-platform</code>) — holds Backstage's own secrets (Postgres connection string, GitHub App credentials).</p>
+<p>We will use <strong>two separate Key Vaults</strong>:</p>
+<ul>
+<li><code>kv-platform-pipeline</code> (stage <code>2-security</code>) — holds Terraform backend secrets, GitHub tokens used by CI/CD.</li>
+<li><code>kv-backstage-app</code> (stage <code>4-platform</code>) — holds Backstage's own secrets (Postgres connection string, GitHub App credentials).</li>
+</ul>
 <p>Each vault has its own Managed Identity scope: the pipeline's identity has no access to <code>kv-backstage-app</code>, and Backstage's identity has no access to <code>kv-platform-pipeline</code>.</p>
 <hr />
 <h2 id="rationale">Rationale</h2>

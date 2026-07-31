@@ -1766,16 +1766,20 @@
 <hr />
 <h2 id="context">Context</h2>
 <p>We need to design the Azure network architecture for the Nexus Azure Platform.</p>
-<p>The architecture must support:
-- Multiple environments (dev, staging, prod) isolated from each other
-- Centralized security and governance controls
-- Connectivity between all environments and shared services
-- Private access to PaaS services (Key Vault, Storage, etc.)
-- Scalability for future workloads and teams
-- Cost optimization</p>
-<p>The two primary architectural patterns considered are:
-- <strong>Hub &amp; Spoke</strong> : A central hub VNet with shared services, and spoke VNets for workloads.
-- <strong>Flat VNet</strong> : A single large VNet with all resources and subnets.</p>
+<p>The architecture must support:</p>
+<ul>
+<li>Multiple environments (dev, staging, prod) isolated from each other</li>
+<li>Centralized security and governance controls</li>
+<li>Connectivity between all environments and shared services</li>
+<li>Private access to PaaS services (Key Vault, Storage, etc.)</li>
+<li>Scalability for future workloads and teams</li>
+<li>Cost optimization</li>
+</ul>
+<p>The two primary architectural patterns considered are:</p>
+<ul>
+<li><strong>Hub &amp; Spoke</strong> : A central hub VNet with shared services, and spoke VNets for workloads.</li>
+<li><strong>Flat VNet</strong> : A single large VNet with all resources and subnets.</li>
+</ul>
 <hr />
 <h2 id="decision">Decision</h2>
 <p>We will use the <strong>Hub &amp; Spoke</strong> topology.</p>

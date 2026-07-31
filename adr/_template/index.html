@@ -1794,12 +1794,38 @@ We will use <strong>GitHub Actions</strong>.</p>
 </tbody>
 </table>
 <blockquote>
-<p><strong>Example:</strong><br />
-| Criteria | GitHub Actions | Azure DevOps |
-| :--- | :--- | :--- |
-| <strong>Native Integration</strong> | ✅ Code and pipelines in one place | ❌ Requires separate project |
-| <strong>Cost</strong> | ✅ Free for public repos | ❌ Costs scale with usage |
-| <strong>Backstage Integration</strong> | ✅ Native plugin | ❌ Custom integration required |</p>
+<p><strong>Example:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Criteria</th>
+<th style="text-align: left;">GitHub Actions</th>
+<th style="text-align: left;">Azure DevOps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Native Integration</strong></td>
+<td style="text-align: left;">✅ Code and pipelines in one place</td>
+<td style="text-align: left;">❌ Requires separate project</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Cost</strong></td>
+<td style="text-align: left;">✅ Free for public repos</td>
+<td style="text-align: left;">❌ Costs scale with usage</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Backstage Integration</strong></td>
+<td style="text-align: left;">✅ Native plugin</td>
+<td style="text-align: left;">❌ Custom integration required</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
 </blockquote>
 <hr />
 <h2 id="consequences">Consequences</h2>
@@ -1813,10 +1839,12 @@ We will use <strong>GitHub Actions</strong>.</p>
 </ul>
 <blockquote>
 <p><strong>Example:</strong><br />
-<strong>Positive:</strong><br />
-- Single source of truth (code + pipelines in one place).<br />
-<strong>Negative:</strong><br />
-- Parallelism limits on the free tier.</p>
+<strong>Positive:</strong>  </p>
+<ul>
+<li>Single source of truth (code + pipelines in one place).<br />
+<strong>Negative:</strong>  </li>
+<li>Parallelism limits on the free tier.</li>
+</ul>
 </blockquote>
 <hr />
 <h2 id="when-to-reconsider">When to reconsider</h2>
@@ -1826,9 +1854,11 @@ We will use <strong>GitHub Actions</strong>.</p>
 <li>Trigger 2 (e.g., a better alternative becomes available or mature).</li>
 </ul>
 <blockquote>
-<p><strong>Example:</strong><br />
-- If the organization adopts Azure DevOps as a company-wide standard.<br />
-- If self-hosted runner costs at scale make Azure DevOps more competitive.</p>
+<p><strong>Example:</strong>  </p>
+<ul>
+<li>If the organization adopts Azure DevOps as a company-wide standard.  </li>
+<li>If self-hosted runner costs at scale make Azure DevOps more competitive.</li>
+</ul>
 </blockquote>
 <hr />
 <h2 id="alternatives-considered">Alternatives Considered</h2>
@@ -1838,9 +1868,11 @@ We will use <strong>GitHub Actions</strong>.</p>
 <li><strong>Alternative 2</strong> : Description. <em>Why rejected?</em>  </li>
 </ul>
 <blockquote>
-<p><strong>Example:</strong><br />
-- <strong>Azure DevOps</strong> : Rejected because it requires managing a separate project and discourages external contributors.<br />
-- <strong>Jenkins</strong> : Rejected due to maintenance overhead.</p>
+<p><strong>Example:</strong>  </p>
+<ul>
+<li><strong>Azure DevOps</strong> : Rejected because it requires managing a separate project and discourages external contributors.  </li>
+<li><strong>Jenkins</strong> : Rejected due to maintenance overhead.</li>
+</ul>
 </blockquote>
 <hr />
 <h2 id="related-adrs">Related ADRs</h2>

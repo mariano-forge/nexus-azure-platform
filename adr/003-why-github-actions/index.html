@@ -1765,12 +1765,14 @@
 <strong>Context:</strong> Nexus Azure Platform</p>
 <hr />
 <h2 id="context">Context</h2>
-<p>We need a CI/CD orchestrator for the Nexus Azure Platform. The platform requires:
-- Infrastructure as Code validation (Terraform fmt, validate, plan)
-- Security scanning (tfsec, Checkov, Trivy, Gitleaks)
-- Manual approval gates before production apply
-- Integration with Backstage (via Scaffolder)
-- Cost management and visibility</p>
+<p>We need a CI/CD orchestrator for the Nexus Azure Platform. The platform requires:</p>
+<ul>
+<li>Infrastructure as Code validation (Terraform fmt, validate, plan)</li>
+<li>Security scanning (tfsec, Checkov, Trivy, Gitleaks)</li>
+<li>Manual approval gates before production apply</li>
+<li>Integration with Backstage (via Scaffolder)</li>
+<li>Cost management and visibility</li>
+</ul>
 <p>The two primary candidates on Azure are <strong>GitHub Actions</strong> and <strong>Azure DevOps</strong>.</p>
 <hr />
 <h2 id="decision">Decision</h2>

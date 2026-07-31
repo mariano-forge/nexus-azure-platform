@@ -1769,9 +1769,11 @@
 <p>This creates a chicken-and-egg problem: the storage account and initial Key Vault cannot be created by a Terraform run that itself needs a remote backend and Key Vault access to authenticate and store its own state. Something has to exist before the "real" IaC can run.</p>
 <hr />
 <h2 id="decision">Decision</h2>
-<p>We will use a <strong>minimal, one-time bootstrap step</strong>, run manually (or via a dedicated, rarely-run GitHub Actions workflow) with <strong>local state</strong>, whose only job is to create:
-- The Storage Account + Container that will host the remote backend for every other stage.
-- The initial Key Vault (<code>kv-platform-pipeline</code>, see <a href="../009-key-vault-separation/">ADR-009</a>) used to store the credentials the pipeline needs going forward.</p>
+<p>We will use a <strong>minimal, one-time bootstrap step</strong>, run manually (or via a dedicated, rarely-run GitHub Actions workflow) with <strong>local state</strong>, whose only job is to create:</p>
+<ul>
+<li>The Storage Account + Container that will host the remote backend for every other stage.</li>
+<li>The initial Key Vault (<code>kv-platform-pipeline</code>, see <a href="../009-key-vault-separation/">ADR-009</a>) used to store the credentials the pipeline needs going forward.</li>
+</ul>
 <p>The bootstrap's own state file is kept local (not remote) and is treated as a rarely-touched, manually-reviewed piece of infrastructure — it is not expected to change often once the platform exists.</p>
 <hr />
 <h2 id="rationale">Rationale</h2>
