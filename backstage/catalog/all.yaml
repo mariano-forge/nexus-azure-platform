@@ -1,0 +1,11 @@
+---
+
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: nexus-root
+  description: Root catalog location for Nexus Azure Platform
+spec:
+  targets:
+    - ./systems/azure-platform.yaml
+    - ./templates/subscription-vending.yaml

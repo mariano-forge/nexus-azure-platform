@@ -41,6 +41,7 @@ We will **separate** networking and security into two distinct teams with indepe
 In a regulated environment (finance, healthcare, government), **separation of duties** is often a compliance requirement (e.g., PCI-DSS, SOC2). A single team that can both create a network vulnerability and approve its deployment represents a significant risk.
 
 By modelling this separation explicitly, the platform demonstrates:
+
 - **Security awareness** — we don't just talk about security, we embed it.
 - **Enterprise readiness** — organizations can adopt the platform without restructuring.
 - **Maturity** — we think beyond the code to the people and processes.
@@ -50,15 +51,18 @@ By modelling this separation explicitly, the platform demonstrates:
 ## Consequences
 
 ### Positive
+
 - **Clear ownership**: Each team knows exactly what they are responsible for.
 - **Stronger security posture**: Changes to critical infrastructure require multiple approvals.
 - **Adoption-friendly**: Companies with separate NetOps and SecOps teams can adopt the platform as-is.
 
 ### Negative
+
 - **Slightly more friction**: Some PRs may require reviews from two teams, slowing down velocity.
 - **Increased complexity**: The CODEOWNERS file becomes more granular and requires careful maintenance.
 
 ### Mitigation
+
 - For non-critical changes, the default owner (`@mariano-forge/platform-engineering`) can review and approve.
 - Use GitHub's **CODEOWNERS** feature to enforce reviews only on relevant paths.
 - Document the ownership model clearly in `CONTRIBUTING.md`.

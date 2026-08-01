@@ -1,4 +1,5 @@
 # ADR-NNN: [TITLE]
+
 **Status:** [Draft | Proposed | Accepted | Deprecated | Superseded]  
 **Date:** YYYY-MM-DD  
 **Author:** [Your Name]  
@@ -51,13 +52,16 @@ Explain why this decision was made. Provide evidence and reasoning.
 ## Consequences
 
 ### Positive
+
 - List the positive outcomes of this decision.
 
 ### Negative
+
 - List the trade-offs, risks, or downsides.
 
 > **Example:**  
 > **Positive:**  
+>
 > - Single source of truth (code + pipelines in one place).  
 > **Negative:**  
 > - Parallelism limits on the free tier.
@@ -72,6 +76,7 @@ Describe the conditions or triggers that would lead to revisiting this decision.
 - Trigger 2 (e.g., a better alternative becomes available or mature).
 
 > **Example:**  
+>
 > - If the organization adopts Azure DevOps as a company-wide standard.  
 > - If self-hosted runner costs at scale make Azure DevOps more competitive.
 
@@ -85,6 +90,7 @@ List the alternatives that were considered and explain why they were rejected.
 - **Alternative 2** : Description. *Why rejected?*  
 
 > **Example:**  
+>
 > - **Azure DevOps** : Rejected because it requires managing a separate project and discourages external contributors.  
 > - **Jenkins** : Rejected due to maintenance overhead.
 

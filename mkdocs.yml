@@ -67,6 +67,8 @@ nav:
           - "ADR-001 · Terraform": adr/001-why-terraform.md
           - "ADR-003 · GitHub Actions": adr/003-why-github-actions.md
           - "ADR-011 · Dependency Management": adr/011-dependency-management-strategy.md
+          - "ADR-012 · AVM Pattern Modules": adr/012-avm-pattern-modules.md
+          - "ADR-013 · Policy Catalog vs. Assignment Scope": adr/013-policy-catalog-vs-assignment-scope.md
       - Networking & Security:
           - "ADR-002 · Hub & Spoke": adr/002-why-hub-spoke.md
           - "ADR-004 · Private Endpoints": adr/004-why-private-endpoints.md

@@ -12,12 +12,14 @@
 We need to secure all network traffic for the Nexus Azure Platform, particularly access to PaaS services (Key Vault, Storage, Azure Monitor, etc.) and workload isolation.
 
 The platform must:
+
 - Keep all data private (no public internet exposure for PaaS services)
 - Enforce network segmentation and access control
 - Be **cost-optimized** for open-source contributors (MVP phase)
 - Allow future evolution to enterprise-grade network security
 
 The primary approaches considered:
+
 - **Azure Firewall** : Fully managed, stateful firewall with L3-L7 inspection, FQDN filtering, and threat intelligence.
 - **NSGs + Private Endpoints** : Network Security Groups for micro-segmentation + Private Endpoints to bring PaaS services into the VNet.
 - **Service Endpoints** : Expose PaaS services to the VNet via Azure backbone, but still use public IPs.
@@ -27,6 +29,7 @@ The primary approaches considered:
 ## Decision
 
 We will **not** deploy Azure Firewall in the MVP. Instead, we will use:
+
 - **Private Endpoints** : For all PaaS services (Key Vault, Storage, Azure Monitor, etc.) to make them entirely private.
 - **NSGs (Network Security Groups)** with Service Tags for micro-segmentation at the subnet level.
 - **Deny all** inbound/outbound rules by default, with explicit allow rules only where necessary.
@@ -48,6 +51,7 @@ We will **not** deploy Azure Firewall in the MVP. Instead, we will use:
 ---
 
 ### NSG Strategy
+
 - **Default Deny** : NSGs deny all inbound/outbound traffic by default.
 - **Service Tags** : Allow specific Azure Service Tags (e.g., `AzureKeyVault`, `AzureMonitor`) for required services.
 - **Spoke-to-Hub Routing** : Force tunneling via the Hub to centralize egress filtering.
@@ -68,6 +72,7 @@ We will **not** deploy Azure Firewall in the MVP. Instead, we will use:
 ## Consequences
 
 ### Positive
+
 - **Cost Optimization**: Saves ~300€/month on infrastructure costs.
 - **Accessibility**: Low barrier to entry for open-source contributors (no huge recurring cost).
 - **Security**: Private Endpoints ensure PaaS services are not exposed to the public internet.
@@ -75,6 +80,7 @@ We will **not** deploy Azure Firewall in the MVP. Instead, we will use:
 - **Simplicity**: NSG rules are easier to manage than complex firewall policies.
 
 ### Negative
+
 - **Limited L7 Inspection**: Without Azure Firewall, we cannot perform deep packet inspection (e.g., SQL injection detection, FQDN filtering).
 - **No Centralized Egress Control**: Egress filtering relies on NSGs per subnet, not a single pane of glass.
 - **Complex DNS**: Requires managing Private DNS Zones for each PaaS service.

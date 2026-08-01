@@ -21,6 +21,7 @@ The question is whether Backstage should read from the same Key Vault as the pip
 ## Decision
 
 We will use **two separate Key Vaults**:
+
 - `kv-platform-pipeline` (stage `2-security`) — holds Terraform backend secrets, GitHub tokens used by CI/CD.
 - `kv-backstage-app` (stage `4-platform`) — holds Backstage's own secrets (Postgres connection string, GitHub App credentials).
 
@@ -42,11 +43,13 @@ Each vault has its own Managed Identity scope: the pipeline's identity has no ac
 ## Consequences
 
 ### Positive
+
 - Compromise of the Backstage App Service (a more exposed, developer-facing component) cannot expose pipeline/backend secrets.
 - Ownership is unambiguous: the vault name tells you which team/system owns what's inside.
 - No dependency on remembering to scope every individual secret's RBAC correctly — the boundary is the vault itself.
 
 ### Negative
+
 - Slightly more Terraform to maintain (two vault resources instead of one).
 - Two places to check when auditing "what secrets exist" — mitigated by listing both vaults in the observability/runbook documentation.
 

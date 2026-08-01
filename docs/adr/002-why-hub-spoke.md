@@ -12,6 +12,7 @@
 We need to design the Azure network architecture for the Nexus Azure Platform.
 
 The architecture must support:
+
 - Multiple environments (dev, staging, prod) isolated from each other
 - Centralized security and governance controls
 - Connectivity between all environments and shared services
@@ -20,6 +21,7 @@ The architecture must support:
 - Cost optimization
 
 The two primary architectural patterns considered are:
+
 - **Hub & Spoke** : A central hub VNet with shared services, and spoke VNets for workloads.
 - **Flat VNet** : A single large VNet with all resources and subnets.
 
@@ -48,12 +50,14 @@ We will use the **Hub & Spoke** topology.
 ## Consequences
 
 ### Positive
+
 - **Security by default**: Centralized Azure Firewall/NSG policies in the hub enforce security across all spokes.
 - **Governance**: Single place to manage Azure Policies, RBAC, and monitoring.
 - **Scale**: New teams or workloads can be added as new spokes without impacting existing ones.
 - **Clear environment separation**: Each environment (dev, staging, prod) can be a separate spoke, preventing cross-environment contamination.
 
 ### Negative
+
 - **Peering complexity**: VNet peering must be configured between hub and each spoke.
 - **Cost**: VNet peering incurs ingress/egress charges (data transfer).
 - **Latency**: Traffic between spokes goes through the hub, potentially adding minimal latency.

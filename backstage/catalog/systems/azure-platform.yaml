@@ -1,0 +1,16 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: azure-landing-zone
+  title: Azure Landing Zone Platform
+  description: Core Azure Landing Zone (Hub & Spoke + Policy + Key Vault) managed by the platform team.
+  tags:
+    - azure
+    - platform
+    - infrastructure
+  annotations:
+    github.com/project-slug: mariano-forge/nexus-azure-platform
+    backstage.io/techdocs-ref: dir:.
+spec:
+  owner: user:default/john@example.com
+  domain: cloud-infrastructure
