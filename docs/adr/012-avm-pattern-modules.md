@@ -1,7 +1,7 @@
 # ADR-012: AVM Pattern Modules for Governance and Subscription Vending
 
 **Status:** ✅ Accepted  
-**Date:** 2026-07-25 
+**Date:** 2026-07-25
 **Author:** Mariano Gbego  
 **Context:** Nexus Azure Platform
 
