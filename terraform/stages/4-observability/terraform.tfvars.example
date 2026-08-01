@@ -1,0 +1,15 @@
+default_location          = "francecentral"
+management_resource_group = "rg-nexus-management"
+log_analytics_workspace_name = "law-nexus-platform"
+automation_account_name   = "aa-nexus-platform"
+
+log_analytics_solution_plans = [
+  { product = "OMSGallery/SecurityInsights" },
+  { product = "OMSGallery/Updates" },
+]
+
+tags = {
+  managed-by  = "terraform"
+  stage       = "management"
+  environment = "platform"
+}
