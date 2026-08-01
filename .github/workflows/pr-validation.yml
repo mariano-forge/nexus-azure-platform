@@ -40,6 +40,7 @@ jobs:
           VALIDATE_YAML: true
           VALIDATE_JSON: true
           DEFAULT_BRANCH: main
+          FILTER_REGEX_EXCLUDE: '.*backstage/catalog/templates/content/.*'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   # ─────────────────────────────────────────────────────────────
