@@ -1,0 +1,373 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: azure-subscription-vending
+  title: Request an Azure Subscription
+  description: >
+    Opens a Terraform PR on the Landing Zone repo to provision a governed Azure
+    subscription through the M2 approval workflow.
+  tags:
+    - azure
+    - subscription
+    - landing-zone
+spec:
+  owner: group:platform-team
+  type: infrastructure
+
+  parameters:
+    - title: Subscription basics
+      required: [subscriptionName, environment, costCenter, owner]
+      properties:
+        subscriptionName:
+          title: Subscription alias (short name)
+          type: string
+          description: 'e.g. "project-phoenix" (lowercase, digits, hyphens)'
+          pattern: '^[a-z][a-z0-9-]{2,30}[a-z0-9]$'
+          ui:autofocus: true
+        environment:
+          title: Environment
+          type: string
+          enum: [dev, test, prod]
+          enumNames: [Development, Test, Production]
+          default: dev
+        costCenter:
+          title: Cost center
+          type: string
+          description: 'Format: CC-NNNN (4 digits)'
+          pattern: '^CC-[0-9]{4}$'
+        owner:
+          title: Owner email
+          type: string
+          format: email
+        region:
+          title: Azure region
+          type: string
+          default: francecentral
+          enum: [francecentral, westeurope, northeurope]
+          enumNames: [France Central, West Europe, North Europe]
+        billingScope:
+          title: Billing scope (optional)
+          type: string
+          description: 'Leave empty to use default. Example: /providers/Microsoft.Billing/billingAccounts/...'
+
+    - title: Resource Groups
+      properties:
+        resourceGroupCreationEnabled:
+          title: Create resource groups
+          type: boolean
+          default: false
+        resourceGroups:
+          title: Resource groups
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                title: Key (unique identifier inside the YAML)
+                type: string
+                description: 'e.g. "rg_app"'
+              name:
+                title: Resource group name
+                type: string
+                description: 'e.g. "rg-app-prod"'
+              location:
+                title: Location (optional - defaults to region)
+                type: string
+                description: 'e.g. "westeurope"'
+              tags:
+                title: Tags (key-value pairs)
+                type: object
+                additionalProperties:
+                  type: string
+                description: 'e.g. {"purpose": "application"}'
+              lock_enabled:
+                title: Enable lock on RG?
+                type: boolean
+                default: false
+              lock_name:
+                title: Lock name (optional)
+                type: string
+          ui:options:
+            addable: true
+            removable: true
+            orderable: false
+
+    - title: Role Assignments
+      properties:
+        roleAssignmentEnabled:
+          title: Add role assignments
+          type: boolean
+          default: false
+        roleAssignments:
+          title: Role assignments
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                title: Key (unique identifier)
+                type: string
+                description: 'e.g. "reader_team_a"'
+              principal_id:
+                title: Principal ID (UUID)
+                type: string
+                pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fa-fA-F]{12}$'
+                description: 'e.g. "00000000-0000-0000-0000-000000000000"'
+              definition:
+                title: Role definition
+                type: string
+                description: 'Built-in role name (e.g. "Reader") or full resource ID'
+              relative_scope:
+                title: Relative scope (optional)
+                type: string
+                description: 'Leave blank for subscription scope. e.g. "/resourceGroups/rg-app-prod"'
+              principal_type:
+                title: Principal type
+                type: string
+                enum: [User, Group, ServicePrincipal]
+                default: Group
+          ui:options:
+            addable: true
+            removable: true
+
+    - title: Budgets
+      properties:
+        budgetEnabled:
+          title: Enable budgets
+          type: boolean
+          default: false
+        budgets:
+          title: Budgets
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                title: Key (unique identifier)
+                type: string
+                description: 'e.g. "budget_mensuel"'
+              amount:
+                title: Amount (in tenant currency)
+                type: number
+                minimum: 0
+              time_grain:
+                title: Time grain
+                type: string
+                enum: [Monthly, Quarterly, Annually]
+                default: Monthly
+              time_period_start:
+                title: Start date
+                type: string
+                format: date-time
+                default: '2024-01-01T00:00:00Z'
+              time_period_end:
+                title: End date
+                type: string
+                format: date-time
+                default: '2030-12-31T23:59:59Z'
+              notifications:
+                title: Notifications
+                type: array
+                items:
+                  type: object
+                  properties:
+                    key:
+                      title: Alert key
+                      type: string
+                      description: 'e.g. "alerte_80"'
+                    enabled:
+                      title: Enabled
+                      type: boolean
+                      default: true
+                    operator:
+                      title: Operator
+                      type: string
+                      enum: [GreaterThan, GreaterThanOrEqualTo]
+                      default: GreaterThan
+                    threshold:
+                      title: Threshold (%)
+                      type: number
+                      minimum: 0
+                      maximum: 100
+                    threshold_type:
+                      title: Threshold type
+                      type: string
+                      enum: [Actual, Forecasted]
+                      default: Actual
+                    contact_emails:
+                      title: Contact emails
+                      type: array
+                      items:
+                        type: string
+                        format: email
+                    contact_roles:
+                      title: Contact roles
+                      type: array
+                      items:
+                        type: string
+                        enum: [Owner, Contributor, Reader]
+          ui:options:
+            addable: true
+            removable: true
+
+    - title: Resource Providers
+      properties:
+        registerProvidersEnabled:
+          title: Register resource providers
+          type: boolean
+          default: false
+        providers:
+          title: Resource providers
+          type: array
+          items:
+            type: object
+            properties:
+              provider:
+                title: Provider namespace
+                type: string
+                description: 'e.g. "Microsoft.Compute"'
+              features:
+                title: Features (optional)
+                type: array
+                items:
+                  type: string
+                description: 'List of feature names'
+          ui:options:
+            addable: true
+            removable: true
+
+    - title: Managed Identities (optional)
+      properties:
+        identities:
+          title: User-Assigned Managed Identities
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                title: Key (unique identifier)
+                type: string
+                description: 'e.g. "identity_cicd"'
+              name:
+                title: Identity name
+                type: string
+              resource_group_key:
+                title: Resource group key
+                type: string
+                description: 'Reference a resource group key defined above'
+              resource_group_name_existing:
+                title: Or use existing RG name
+                type: string
+              tags:
+                title: Tags (key-value)
+                type: object
+                additionalProperties:
+                  type: string
+              role_assignments:
+                title: Role assignments for this identity
+                type: array
+                items:
+                  type: object
+                  properties:
+                    key:
+                      title: Key
+                      type: string
+                    definition:
+                      title: Role definition
+                      type: string
+                    relative_scope:
+                      title: Relative scope
+                      type: string
+              federated_credentials_github:
+                title: GitHub federated credentials
+                type: array
+                items:
+                  type: object
+                  properties:
+                    key:
+                      title: Key
+                      type: string
+                    organization:
+                      title: GitHub organisation
+                      type: string
+                    repository:
+                      title: Repository name
+                      type: string
+                    entity:
+                      title: Entity type
+                      type: string
+                      enum: [branch, environment, pull_request, tag]
+                    value:
+                      title: Entity value
+                      type: string
+          ui:options:
+            addable: true
+            removable: true
+
+    - title: Final options
+      properties:
+        subscriptionAliasEnabled:
+          title: Subscription alias enabled (for existing subscriptions)
+          type: boolean
+          default: true
+          description: 'If false, the subscription is not created, only management group attachment is managed.'
+
+    - title: Target repository
+      required: [repoUrl]
+      properties:
+        repoUrl:
+          title: Landing Zone repository
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts: [github.com]
+            allowedOwners: [mariano-forge]
+
+  steps:
+    - id: fetch
+      name: Generate subscription request YAML
+      action: fetch:template
+      input:
+        url: ./content
+        values:
+          subscriptionName: ${{ parameters.subscriptionName }}
+          environment: ${{ parameters.environment }}
+          costCenter: ${{ parameters.costCenter }}
+          owner: ${{ parameters.owner }}
+          region: ${{ parameters.region | default("francecentral") }}
+          managementGroupId: mariano-forge-landingzones-${{ "corp" if parameters.environment == "prod" else "sandboxes" }}
+          workload: ${{ "Production" if parameters.environment == "prod" else "DevTest" }}
+          billingScope: ${{ parameters.billingScope | default("") }}
+          subscriptionAliasEnabled: ${{ parameters.subscriptionAliasEnabled | default(true) }}
+          resourceGroupCreationEnabled: ${{ parameters.resourceGroupCreationEnabled | default(false) }}
+          resourceGroups: ${{ parameters.resourceGroups | default([]) }}
+          roleAssignmentEnabled: ${{ parameters.roleAssignmentEnabled | default(false) }}
+          roleAssignments: ${{ parameters.roleAssignments | default([]) }}
+          budgetEnabled: ${{ parameters.budgetEnabled | default(false) }}
+          budgets: ${{ parameters.budgets | default([]) }}
+          registerProvidersEnabled: ${{ parameters.registerProvidersEnabled | default(false) }}
+          providers: ${{ parameters.providers | default([]) }}
+          identities: ${{ parameters.identities | default([]) }}
+
+    - id: pr
+      name: Open PR on Landing Zone repo
+      action: publish:github:pull-request
+      input:
+        repoUrl: ${{ parameters.repoUrl }}
+        title: "feat(vending): provision ${{ parameters.subscriptionName }}-${{ parameters.environment }}"
+        branchName: "vending/${{ parameters.subscriptionName }}-${{ parameters.environment }}"
+        description: |
+          ## Subscription vending request
+          | Field | Value |
+          |---|---|
+          | Alias | `${{ parameters.subscriptionName }}-${{ parameters.environment }}` |
+          | Environment | `${{ parameters.environment }}` |
+          | Cost center | `${{ parameters.costCenter }}` |
+          | Owner | `${{ parameters.owner }}` |
+          | Region | `${{ parameters.region }}` |
+          Merging this PR triggers Terraform apply.
+
+  output:
+    links:
+      - title: Pull Request
+        url: ${{ steps.pr.output.remoteUrl }}
