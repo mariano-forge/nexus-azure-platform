@@ -22,9 +22,9 @@ module "backstage_acr" {
   source  = "Azure/avm-res-containerregistry-registry/azurerm"
   version = "0.7.0"
 
-  name                = "acr${var.workload_name}${var.environment}"
-  resource_group_name = var.platform_resource_group
-  location            = var.default_location
+  name                    = "acr${var.workload_name}${var.environment}"
+  resource_group_name     = var.platform_resource_group
+  location                = var.default_location
   zone_redundancy_enabled = false
 
   sku                           = var.acr_sku
@@ -88,8 +88,8 @@ module "backstage_postgres" {
   administrator_login    = var.postgres_admin_login
   administrator_password = random_password.postgres.result
 
-  sku_name           = var.postgres_sku_name
-  storage_mb         = var.postgres_storage_mb
+  sku_name       = var.postgres_sku_name
+  storage_mb     = var.postgres_storage_mb
   server_version = "16"
 
   backup_retention_days        = 7
