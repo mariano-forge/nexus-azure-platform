@@ -47,6 +47,7 @@ It answers a narrow, concrete question:
 > *What does a governed, secure Azure Landing Zone look like when developers can provision subscriptions and networks themselves, without opening a ticket — and how do you document every trade-off along the way?*
 
 This project intentionally does **not** try to be a full internal developer platform out of the gate. It focuses on getting two things right first:
+
 1. A landing zone that is actually deployed and actually secured.
 2. A self-service portal that actually provisions real resources through a real approval workflow.
 

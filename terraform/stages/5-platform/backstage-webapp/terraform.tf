@@ -6,17 +6,17 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "~> 4.0"
     }
-    azapi = {
-      source  = "azure/azapi"
-      version = "~> 2.5"
-    }
     modtm = {
       source  = "azure/modtm"
       version = "~> 0.3"
     }
     random = {
       source  = "hashicorp/random"
-      version = "~> 3.5"
+      version = "~> 3.6"
+    }
+    azapi = {
+      source  = "azure/azapi"
+      version = "~> 2.5"
     }
   }
 
@@ -24,7 +24,7 @@ terraform {
   #   resource_group_name  = "rg-nexus-tfstate"
   #   storage_account_name = "stnexustfstate"
   #   container_name       = "cntnr-tfstate"
-  #   key                  = "connectivity.terraform.tfstate"
+  #   key                  = "platform.terraform.tfstate"
   # }
 }
 
