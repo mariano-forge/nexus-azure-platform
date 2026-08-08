@@ -19,11 +19,11 @@ variable "location" {
 # }
 
 # tflint-ignore: terraform_unused_declarations -- kept for when diagnostic_settings blocks are uncommented
-variable "log_analytics_workspace_id" {
-  type        = string
-  description = "Resource ID of the Log Analytics workspace (from 4-observability) — temporary input var until naming convention lets us resolve this via a data source"
-  default     = ""
-}
+# variable "log_analytics_workspace_id" {
+#   type        = string
+#   description = "Resource ID of the Log Analytics workspace (from 4-observability) — temporary input var until naming convention lets us resolve this via a data source"
+#   default     = ""
+# }
 
 variable "workload_name" {
   type        = string

@@ -133,7 +133,9 @@ private_dns_zones_enabled = true
 Error: NetcfgSubnetRangesOverlap — Subnet 'AzureFirewallSubnet' overlaps with an existing subnet.
 ```
 
-**Cause:** The AVM module (`avm-ptn-alz-connectivity-hub-and-spoke-vnet ~> 0.17`) auto-calculates firewall subnet CIDRs using `cidrsubnets()` from the hub address space. When `default_hub_address_space` is not explicitly set, the module defaults to `10.0.0.0/16` and allocates subnets sequentially — without knowing about custom subnets already defined. This causes `AzureFirewallSubnet` to collide with `AzureBastionSubnet` (both end up at `10.0.0.64/26`).
+**Cause:** The AVM module (`avm-ptn-alz-connectivity-hub-and-spoke-vnet ~> 0.17`) auto-calculates firewall subnet CIDRs using `cidrsubnets()` from the hub address space.
+When `default_hub_address_space` is not explicitly set, the module defaults to `10.0.0.0/16` and allocates subnets sequentially — without knowing about custom subnets already defined.
+This causes `AzureFirewallSubnet` to collide with `AzureBastionSubnet` (both end up at `10.0.0.64/26`).
 
 **Fix:** Provide explicit CIDRs in the `firewall` block to bypass the auto-allocator:
 

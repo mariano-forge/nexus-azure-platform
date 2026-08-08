@@ -206,6 +206,10 @@ resource "azurerm_postgresql_flexible_server" "backstage" {
   zone                         = "1"
 
   tags = var.tags
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 # -----------------------------------------------------------------------------
