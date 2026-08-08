@@ -128,7 +128,8 @@ private_dns_zones_enabled = true
 ### `NetcfgSubnetRangesOverlap` — AzureFirewallSubnet
 
 **Symptom:**
-```
+
+```plaintext
 Error: NetcfgSubnetRangesOverlap — Subnet 'AzureFirewallSubnet' overlaps with an existing subnet.
 ```
 
@@ -151,12 +152,14 @@ firewall = {
 **Symptom:** After a failed apply with `firewall = true`, re-applying fails because `AzureFirewallManagementSubnet` was created in a previous partial run and now conflicts with the `AzureFirewallSubnet` being created.
 
 **Diagnosis:**
+
 ```powershell
 az network vnet show --name <vnet-name> --resource-group <rg> \
   --query "subnets[].{name:name, cidrs:addressPrefixes}" -o table
 ```
 
 **Fix:** Destroy the hub module and recreate cleanly:
+
 ```powershell
 terraform destroy -target="module.hub_and_spoke"
 terraform apply
@@ -167,7 +170,8 @@ terraform apply
 ### `AzfwAddToFirewallPolicyFailed` — Firewall SKU mismatch
 
 **Symptom:**
-```
+
+```plaintext
 Azure Firewall failed to reference Firewall Policy — AzfwAddToFirewallPolicyFailed
 ```
 
@@ -180,7 +184,8 @@ Azure Firewall failed to reference Firewall Policy — AzfwAddToFirewallPolicyFa
 ### `Invalid value for variable` — Bastion Developer SKU
 
 **Symptom:**
-```
+
+```plaintext
 The virtual network ID is required for the Developer SKU (Only).
 The IP configuration is not required for the Developer SKU.
 The Developer SKU does not support availability zones.

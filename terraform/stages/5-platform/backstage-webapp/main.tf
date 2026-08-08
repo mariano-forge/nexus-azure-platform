@@ -144,9 +144,9 @@ resource "azurerm_key_vault_secret" "postgres_password" {
   # Wait for the full module (including role assignment RBAC propagation) before writing the secret
   depends_on = [module.backstage_keyvault]
 
-  # lifecycle {
-  #   prevent_destroy = true
-  # }
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "azurerm_key_vault_secret" "github_client_id" {
@@ -157,9 +157,9 @@ resource "azurerm_key_vault_secret" "github_client_id" {
   # Wait for the full module (including role assignment RBAC propagation) before writing the secret
   depends_on = [module.backstage_keyvault]
 
-  # lifecycle {
-  #   prevent_destroy = true
-  # }
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "azurerm_key_vault_secret" "github_client_secret" {
@@ -170,9 +170,9 @@ resource "azurerm_key_vault_secret" "github_client_secret" {
   # Wait for the full module (including role assignment RBAC propagation) before writing the secret
   depends_on = [module.backstage_keyvault]
 
-  # lifecycle {
-  #   prevent_destroy = true
-  # }
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "azurerm_key_vault_secret" "github_token" {
@@ -183,9 +183,9 @@ resource "azurerm_key_vault_secret" "github_token" {
   # Wait for the full module (including role assignment RBAC propagation) before writing the secret
   depends_on = [module.backstage_keyvault]
 
-  # lifecycle {
-  #   prevent_destroy = true
-  # }
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 # Direct resource instead of AVM module — AVM 0.2.3 forces HA which is incompatible with Burstable SKU
