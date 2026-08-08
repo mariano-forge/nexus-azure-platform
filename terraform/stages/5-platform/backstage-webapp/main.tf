@@ -55,6 +55,9 @@ resource "random_string" "webapp_suffix" {
   length  = 2
   upper   = false
   special = false
+  lifecycle {
+    ignore_changes = [keepers]
+  }
 }
 
 module "backstage_acr" {
@@ -299,4 +302,10 @@ resource "azurerm_postgresql_flexible_server_firewall_rule" "allow_azure_service
   server_id        = azurerm_postgresql_flexible_server.backstage.id
   start_ip_address = "0.0.0.0"
   end_ip_address   = "0.0.0.0"
+}
+
+resource "azurerm_postgresql_flexible_server_configuration" "max_connections" {
+  name      = "max_connections"
+  server_id = azurerm_postgresql_flexible_server.backstage.id
+  value     = "100"
 }
