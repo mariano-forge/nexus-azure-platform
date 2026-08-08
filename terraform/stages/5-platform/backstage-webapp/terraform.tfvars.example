@@ -1,19 +1,25 @@
 environment                = "dev"
-default_location           = "francecentral"
+location                   = "francecentral"
 workload_name              = "backstage"
 platform_resource_group    = "rg-nexus-platform"
 platform_resource_group_id = "/subscriptions/<subscription-id>/resourceGroups/rg-nexus-platform"
 log_analytics_workspace_id = "/subscriptions/<subscription-id>/resourceGroups/rg-nexus-management/providers/Microsoft.OperationalInsights/workspaces/law-nexus-platform"
 
+docker_image_name                       = "backstage/backstage"
+docker_registry_url                     = "https://ghcr.io"
+container_registry_use_managed_identity = false
+# Switch to ACR for production:
+#   docker_image_name                       = "backstage:<version>"
+#   docker_registry_url                     = "https://acrbackstagedev.azurecr.io"
+#   container_registry_use_managed_identity = true
+
 app_service_plan_sku = "B1"       # B1 = minimum for Linux containers; upgrade to P1v3 for production
 acr_sku              = "Standard" # Standard supports geo-replication; Basic for dev/cost saving
 keyvault_sku         = "standard"
 
-acr_public_network_access_enabled    = false # set to true temporarily if no Private Endpoint is available
+acr_public_network_access_enabled    = true  # Standard SKU does not support disabling public access (requires Premium)
 webapp_public_network_access_enabled = true
 keyvault_purge_protection_enabled    = true  # set to false in sandbox to allow full teardown
-
-docker_image_name = "backstage:latest"
 
 postgres_admin_login  = "backstageadmin"
 postgres_sku_name     = "B_Standard_B1ms" # upgrade to GP_Standard_D2s_v3 for production

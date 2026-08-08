@@ -20,12 +20,12 @@ terraform {
     }
   }
 
-  backend "azurerm" {
-    resource_group_name  = "rg-nexus-tfstate"
-    storage_account_name = "stnexustfstate"
-    container_name       = "cntnr-tfstate"
-    key                  = "connectivity.terraform.tfstate"
-  }
+  # backend "azurerm" {
+  #   resource_group_name  = "rg-nexus-tfstate"
+  #   storage_account_name = "stnexustfstate"
+  #   container_name       = "cntnr-tfstate"
+  #   key                  = "connectivity.terraform.tfstate"
+  # }
 }
 
 provider "azurerm" {

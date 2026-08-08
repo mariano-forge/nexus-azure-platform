@@ -58,12 +58,12 @@ module "hub_and_spoke" {
       default_parent_id = module.rg_connectivity.resource_id
 
       enabled_resources = {
-        firewall                              = false
-        firewall_policy                       = false
-        bastion                               = false
+        firewall                              = var.firewall_enabled
+        firewall_policy                       = var.firewall_sku_tier == "Basic" # Basic SKU requires a policy; Standard does not
+        bastion                               = var.bastion_enabled
         virtual_network_gateway_express_route = false
-        virtual_network_gateway_vpn           = false
-        private_dns_zones                     = true
+        virtual_network_gateway_vpn           = var.vpn_gateway_enabled
+        private_dns_zones                     = var.private_dns_zones_enabled
         private_dns_resolver                  = false
         dns_resolver_policy                   = false
         nat_gateway                           = false
@@ -73,21 +73,11 @@ module "hub_and_spoke" {
         name          = "vnet-hub-${var.prefix}-${var.location}"
         address_space = [var.hub_address_space]
         # No auto-generated route tables — no firewall to route through.
-        route_table_firewall_enabled     = false
+        route_table_firewall_enabled     = var.firewall_enabled
         route_table_user_subnets_enabled = false
         tags                             = var.tags
 
         subnets = {
-          # Reserved for future VPN/ExpressRoute — no NSG (Azure requirement).
-          GatewaySubnet = {
-            name             = "GatewaySubnet"
-            address_prefixes = [local.snet_gateway]
-          }
-          # Reserved for future Bastion — no NSG (Azure requirement on deployment).
-          AzureBastionSubnet = {
-            name             = "AzureBastionSubnet"
-            address_prefixes = [local.snet_bastion]
-          }
           snet-shared = {
             name             = "snet-shared"
             address_prefixes = [local.snet_shared]
@@ -111,6 +101,26 @@ module "hub_and_spoke" {
         auto_registration_zone_enabled = false
         # The module deploys the full ALZ private link DNS zone set and
         # links all zones to the hub VNet automatically.
+      }
+
+      # Explicit CIDRs prevent the module's auto-allocator from conflicting with our custom subnets.
+      # Custom subnets occupy: 10.0.0.0/27, 10.0.0.64/26, 10.0.2.0/24, 10.0.3.0/24
+      firewall = {
+        sku_tier                         = var.firewall_sku_tier
+        subnet_address_prefix            = cidrsubnet(var.hub_address_space, 10, 4) # 10.0.1.0/26
+        management_subnet_address_prefix = cidrsubnet(var.hub_address_space, 10, 5) # 10.0.1.64/26
+      }
+
+      firewall_policy = var.firewall_sku_tier == "Basic" ? { sku = "Basic" } : null
+
+      bastion = {
+        sku                   = var.bastion_sku
+        subnet_address_prefix = local.snet_bastion # module manages AzureBastionSubnet
+      }
+
+      virtual_network_gateways = {
+        subnet_address_prefix = local.snet_gateway # module manages GatewaySubnet
+        vpn                   = { sku = var.vpn_gateway_sku }
       }
     }
   }

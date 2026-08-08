@@ -14,6 +14,6 @@ output "keyvault_name" {
 }
 
 output "postgres_fqdn" {
-  value       = module.backstage_postgres.fqdn
+  value       = azurerm_postgresql_flexible_server.backstage.fqdn
   description = "FQDN of the PostgreSQL Flexible Server (used as POSTGRES_HOST)."
 }

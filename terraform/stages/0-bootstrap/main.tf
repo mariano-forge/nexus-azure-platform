@@ -21,7 +21,7 @@ module "rg_tfstate" {
 # ── Storage Account (Terraform backend) ──────────────────────────────────────
 module "st_tfbackend" {
   source  = "Azure/avm-res-storage-storageaccount/azurerm"
-  version = "0.7.3"
+  version = "0.7.4"
 
   name      = "st${var.prefix}tf${random_string.sa_suffix.result}"
   location  = var.location
@@ -48,7 +48,7 @@ module "kv_pipeline" {
   name                = "kv-${var.prefix}-pipeline"
   location            = var.location
   resource_group_name = module.rg_tfstate.name
-  tenant_id           = data.azurerm_client_config.current.tenant_id
+  tenant_id           = var.tenant_id != null ? var.tenant_id : data.azurerm_client_config.current.tenant_id
 
   sku_name                 = "standard"
   purge_protection_enabled = false # bootstrap is recreatable — purge protection not needed
@@ -62,8 +62,8 @@ module "kv_pipeline" {
   role_assignments = {
     bootstrap_operator = {
       role_definition_id_or_name = "Key Vault Administrator"
-      principal_id               = data.azurerm_client_config.current.object_id
-      principal_type             = "User"
+      principal_id               = var.principal_id != null ? var.principal_id : data.azurerm_client_config.current.object_id
+      principal_type             = var.principal_type
     }
   }
 

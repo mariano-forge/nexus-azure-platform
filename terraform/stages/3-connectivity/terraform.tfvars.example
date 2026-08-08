@@ -1,6 +1,20 @@
-prefix           = "nexus"
-location         = "francecentral"
+prefix            = "nexus"
+location          = "francecentral"
 hub_address_space = "10.0.0.0/16"
+
+firewall_enabled          = false
+bastion_enabled           = false
+vpn_gateway_enabled       = false
+private_dns_zones_enabled = false
+
+# Uncomment and set to true to enable each feature:
+# firewall_enabled    = true
+# firewall_sku_tier   = "Standard"  # or "Basic"
+# bastion_enabled     = true
+# bastion_sku         = "Basic"     # or "Standard"
+# vpn_gateway_enabled = true
+# vpn_gateway_sku     = "Basic"     # or "VpnGw1"
+# private_dns_zones_enabled = true
 
 tags = {
   managed-by  = "terraform"
