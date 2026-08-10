@@ -1,0 +1,14 @@
+spoke_file               = "phoenix-dev.yaml"
+workload_subscription_id = "<workload-subscription-id>"
+
+# From hub remote state outputs:
+hub_subscription_id     = "<connectivity-subscription-id>"
+hub_vnet_id             = "/subscriptions/<id>/resourceGroups/rg-nexus-connectivity/providers/Microsoft.Network/virtualNetworks/vnet-hub-nexus-francecentral"
+hub_vnet_name           = "vnet-hub-nexus-francecentral"
+hub_resource_group_name = "rg-nexus-connectivity"
+
+# Only needed when private_dns_zones_enabled = true in the hub stage:
+# private_dns_zone_ids = { ... }
+
+# Set to true only when a VPN Gateway exists in the hub:
+vpn_gateway_enabled = false

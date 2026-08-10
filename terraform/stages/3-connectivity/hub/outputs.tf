@@ -8,6 +8,11 @@ output "hub_vnet_name" {
   value       = module.hub_and_spoke.name["hub"]
 }
 
+output "hub_subscription_id" {
+  description = "Subscription ID hosting the hub VNet — consumed by spoke-vending for cross-subscription peering."
+  value       = module.rg_connectivity.resource_id == null ? null : regex("/subscriptions/([^/]+)/", module.rg_connectivity.resource_id)[0]
+}
+
 # Subnet IDs are deterministic: <vnet_id>/subnets/<name>
 output "subnet_ids" {
   description = "Map of subnet name → resource ID for all hub subnets."

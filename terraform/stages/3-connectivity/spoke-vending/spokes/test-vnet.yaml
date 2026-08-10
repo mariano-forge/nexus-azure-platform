@@ -1,0 +1,26 @@
+# Example spoke VNet request — copy and rename to {alias}.yaml to submit.
+# File name = spoke alias (used as the Terraform state key suffix).
+# This file is excluded from processing (name starts with _example).
+
+# Required
+spoke_name:    "vnet-spoke-nexus-dev"  # must be globally unique within the hub
+address_space: "192.1.0.0/16" 
+
+subnets:
+  subnet-app:
+    name:           "subnet-app"
+    address_prefix: "192.1.1.0/24"
+
+# Optional — defaults to var.default_location
+location: francecentral
+
+# Optional — link spoke to hub private DNS zones.
+# Requires private_dns_zones_enabled = true in the hub stage.
+private_dns_zone_link_enabled: false
+
+# Required tags (enforced by Azure Policy)
+tags:
+  application: project-nexus
+  environment: dev
+  costCenter:  CC-1234
+  owner:       dev@example.com
