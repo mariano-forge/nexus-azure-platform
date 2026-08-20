@@ -6,7 +6,7 @@ updates:
     schedule:
       interval: "weekly"
     reviewers:
-      - "mariano-gbego"      # ou ton username
+      - "mariano-gbego"
     labels:
       - "dependencies"
       - "terraform"
