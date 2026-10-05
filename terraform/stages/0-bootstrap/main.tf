@@ -48,7 +48,7 @@ module "kv_pipeline" {
   name                = "kv-${var.prefix}-pipeline"
   location            = var.location
   resource_group_name = module.rg_tfstate.name
-  tenant_id           = var.tenant_id != null ? var.tenant_id : data.azurerm_client_config.current.tenant_id
+  tenant_id           = var.tenant_id
 
   sku_name                 = "standard"
   purge_protection_enabled = false # bootstrap is recreatable — purge protection not needed

@@ -6,11 +6,22 @@
 # Azure subscription ID (az account show --query id -o tsv)
 subscription_id = "00000000-0000-0000-0000-000000000000"
 
+# Azure tenant ID (az account show --query homeTenantId -o tsv)
+tenant_id = "00000000-0000-0000-0000-000000000000"
+
 # Region — must be consistent across all stages
 location = "francecentral"
 
 # Short prefix for resource names
 prefix = "nexus"
+
+# The object ID of the principal running the bootstrap
+principal_id = "00000000-0000-0000-0000-000000000000"
+
+
+# The Type of the principal running the bootstrap
+principal_type = "ServicePrincipal" #Posible value are "User", "ServicePrincipal", "ManagedIdentity"
+
 
 # Additional tags (optional)
 # tags = {
